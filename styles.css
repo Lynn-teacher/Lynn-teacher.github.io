@@ -1884,6 +1884,16 @@ footer p {
   margin: 0;
 }
 
+.feedback-contact {
+  padding-top: 5px;
+}
+
+.feedback-contact small {
+  display: block;
+  color: var(--muted);
+  font-size: 0.76rem;
+}
+
 .site-disclaimer a {
   color: var(--blue-dark);
   font-weight: 750;
