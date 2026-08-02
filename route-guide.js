@@ -228,7 +228,7 @@ function renderGuideRoute() {
 
   if (!topic) {
     setGuideView("home");
-    document.title = guide?.title || "小菜老師｜特教資訊整理";
+    document.title = guide?.title || "菜菜老師｜特教資訊整理";
     return;
   }
 
