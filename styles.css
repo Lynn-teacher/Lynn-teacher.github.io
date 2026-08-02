@@ -2270,3 +2270,294 @@ footer p {
     gap: 12px;
   }
 }
+
+/* Placement type selector and route guides */
+.route-portal {
+  min-height: calc(100vh - 88px);
+  min-height: calc(100svh - 88px);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  background: var(--paper);
+}
+
+.route-stage {
+  width: min(960px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 42px 0 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.route-portal-heading {
+  text-align: center;
+}
+
+.route-portal-heading h1 {
+  margin: 0;
+  font-family: "Noto Serif TC", "Songti TC", serif;
+  font-size: 2.7rem;
+  font-weight: 600;
+  line-height: 1.24;
+}
+
+.route-portal-heading > p:last-child {
+  margin: 12px 0 0;
+  color: var(--muted);
+}
+
+.route-card-grid {
+  width: 100%;
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.route-card {
+  min-height: 218px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 25px 24px;
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 13px;
+  text-decoration: none;
+  transition: border-color 0.18s ease, background-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.route-card.high-school,
+.route-card.general {
+  border-color: #d0dfe5;
+  background: #e8f0f3;
+}
+
+.route-card.service {
+  border-color: #ead4cf;
+  background: #f7e9e6;
+}
+
+.route-card:hover,
+.route-card:focus-visible {
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.route-card.high-school:hover,
+.route-card.high-school:focus-visible,
+.route-card.general:hover,
+.route-card.general:focus-visible {
+  border-color: #9eb9c4;
+  background: #e1ecef;
+}
+
+.route-card.service:hover,
+.route-card.service:focus-visible {
+  border-color: #d7aaa2;
+  background: #f5e2de;
+}
+
+.route-number,
+.route-arrow {
+  color: var(--blue);
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.route-arrow {
+  font-size: 1.2rem;
+}
+
+.route-card strong,
+.route-card small {
+  display: block;
+}
+
+.route-card strong {
+  font-size: 1.5rem;
+  line-height: 1.35;
+}
+
+.route-card small {
+  margin-top: 5px;
+  color: var(--blue-dark);
+  font-weight: 700;
+}
+
+.route-card p {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.route-alert {
+  width: 100%;
+  margin: 15px 0 0;
+  border-left: 4px solid #e8b44f;
+  border-radius: 5px;
+  padding: 11px 14px;
+  color: var(--muted);
+  background: var(--gold-soft);
+  font-size: 0.88rem;
+}
+
+.topbar-actions,
+.layer-nav-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.route-switch-link {
+  color: var(--blue-dark);
+  font-size: 0.86rem;
+  font-weight: 750;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.route-switch-link:hover,
+.route-switch-link:focus-visible {
+  text-decoration: underline;
+}
+
+.guide-home-copy {
+  max-width: 780px;
+}
+
+.guide-subtitle {
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.school-list-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.school-list-columns section {
+  padding: 22px;
+}
+
+.school-list-columns section + section {
+  border-left: 1px solid var(--line);
+}
+
+.school-list-columns h3 {
+  margin: 0;
+  font-size: 1.12rem;
+}
+
+.school-list-columns ul {
+  margin: 12px 0 0;
+  padding-left: 1.2rem;
+  color: var(--ink);
+}
+
+.school-list-columns p {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.school-name-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.school-name-grid span {
+  min-height: 54px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 11px 12px;
+  display: flex;
+  align-items: center;
+  background: var(--white);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+@media (max-width: 720px) {
+  .route-portal {
+    min-height: calc(100svh - 108px);
+  }
+
+  .route-stage {
+    width: calc(100% - 28px);
+    padding: 34px 0 48px;
+    justify-content: flex-start;
+  }
+
+  .route-portal-heading h1 {
+    font-size: 1.9rem;
+  }
+
+  .route-portal-heading > p:last-child {
+    max-width: 320px;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 0.9rem;
+  }
+
+  .route-card-grid {
+    margin-top: 25px;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .route-card {
+    min-height: 160px;
+    padding: 19px 17px;
+    grid-template-columns: 30px minmax(0, 1fr) auto;
+    gap: 8px;
+  }
+
+  .route-card strong {
+    font-size: 1.22rem;
+  }
+
+  .route-card p {
+    margin-top: 8px;
+  }
+
+  .topbar-actions {
+    gap: 7px;
+  }
+
+  .topbar-actions .city-switcher {
+    display: none;
+  }
+
+  .route-switch-link {
+    font-size: 0.78rem;
+  }
+
+  .guide-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .school-list-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .school-list-columns section {
+    padding: 18px 0;
+  }
+
+  .school-list-columns section + section {
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
+
+  .school-name-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

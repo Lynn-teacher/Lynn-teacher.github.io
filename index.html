@@ -41,7 +41,7 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20260802a" />
+    <link rel="stylesheet" href="styles.css?v=20260802c" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -78,7 +78,7 @@
             <span class="county-number">01</span>
             <div>
               <strong>臺北市</strong>
-              <small>115 學年度正式簡章完整導覽</small>
+              <small>高級中等學校與服務群科分開整理</small>
             </div>
             <span class="county-status">已整理</span>
           </a>
@@ -86,9 +86,9 @@
             <span class="county-number">02</span>
             <div>
               <strong>新北市</strong>
-              <small>一般類科與服務群科重點導覽</small>
+              <small>一般類科與服務群科分開整理</small>
             </div>
-            <span class="county-status">基本導覽</span>
+            <span class="county-status">已整理</span>
           </a>
         </div>
       </main>
@@ -115,7 +115,7 @@
       const legacyRoutes = new Set(["eligibility", "timeline", "schools", "schoolFinder", "faq", "consultation"]);
       const legacyRoute = location.hash.slice(1);
       if (legacyRoutes.has(legacyRoute)) {
-        location.replace(`taipei/#${legacyRoute}`);
+        location.replace(`taipei/high-school/#${legacyRoute}`);
       }
     </script>
   </body>
