@@ -17,7 +17,7 @@ function sourceNote(text, url, label = "115 學年度官方簡章") {
 
 const guides = {
   "taipei-service": {
-    title: "臺北市集中式特教班服務群科家長導覽",
+    title: "臺北市集中式特教班服務群科",
     shortTitle: "臺北市服務群科",
     topics: {
       eligibility: {
@@ -82,7 +82,7 @@ const guides = {
   },
 
   "new-taipei-general": {
-    title: "新北市一般類科適性輔導安置家長導覽",
+    title: "新北市一般類科適性輔導安置",
     shortTitle: "新北市一般類科",
     topics: {
       eligibility: {
@@ -146,7 +146,7 @@ const guides = {
   },
 
   "new-taipei-service": {
-    title: "新北市集中式特教班服務群科家長導覽",
+    title: "新北市集中式特教班服務群科",
     shortTitle: "新北市服務群科",
     topics: {
       eligibility: {

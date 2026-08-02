@@ -665,8 +665,8 @@ function setActiveView(viewName, resetScroll = true) {
   document.body.dataset.currentView = viewName;
 
   const titles = {
-    home: "臺北市十二年適性安置家長導覽",
-    info: "家長導覽｜臺北市十二年適性安置",
+    home: "臺北市十二年適性安置",
+    info: "臺北市十二年適性安置",
     schools: "學校與名額｜臺北市十二年適性安置",
     consultation: "整理諮詢問題｜臺北市十二年適性安置"
   };
