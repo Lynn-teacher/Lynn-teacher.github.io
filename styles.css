@@ -640,6 +640,33 @@ footer p {
   font-weight: 750;
 }
 
+.faq-list .faq-basis {
+  margin-top: 13px;
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+.faq-basis span {
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-weight: 750;
+}
+
+.faq-basis a {
+  color: var(--blue);
+  text-decoration: none;
+}
+
+.faq-basis a:hover,
+.faq-basis a:focus-visible {
+  text-decoration: underline;
+}
+
 .quick-tools {
   width: 100%;
   max-width: none;

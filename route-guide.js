@@ -15,6 +15,10 @@ function sourceNote(text, url, label = "115 學年度官方簡章") {
   `;
 }
 
+function faqBasis(text, url) {
+  return `<p class="faq-basis"><span>依據</span><a href="${url}" target="_blank" rel="noreferrer">${text}</a></p>`;
+}
+
 const guides = {
   "taipei-service": {
     title: "臺北市集中式特教班服務群科",
@@ -65,15 +69,15 @@ const guides = {
         `
       },
       faq: {
-        label: "常見問題",
-        title: "常見問題",
+        label: "簡章重點問答",
+        title: "簡章重點問答",
         body: `
           <div class="faq-list">
-            <details><summary>服務群科都要參加能力評估嗎？</summary><p>不是。報名 7 所高級中等學校服務群科者須參加學習能力及職業能力評估；報名文山特校或臺北特校者免參加。</p></details>
-            <details><summary>可以同時參加臺北市另一個十二年就學安置嗎？</summary><p>簡章未規定一開始只能二選一；但若已獲十二年就學安置高級中等學校錄取並完成報到，就視同放棄服務群科管道。</p></details>
-            <details><summary>新北市學生也能報名嗎？</summary><p>符合簡章設籍、居住與鑑定資格者可以。高級中等學校服務群科對新北市學生的安置總名額至多 8 名；特教學校交通也要先評估。</p></details>
-            <details><summary>高級中等學校可以填幾個志願？</summary><p>報名表列有 7 個高級中等學校志願欄位。安置時會參酌能力評估結果與志願，並依簡章所列階段辦理。</p></details>
-            <details><summary>報到後還要注意什麼？</summary><p>須於 2026/6/15 前繳交國中畢業證書或修（結）業證書正本，未繳交者視同放棄。</p></details>
+            <details><summary>服務群科都要參加能力評估嗎？</summary><p>不是。報名 7 所高級中等學校服務群科者須參加學習能力及職業能力評估；報名文山特校或臺北特校者免參加。</p>${faqBasis("正式簡章 PDF 第 8 頁，「伍、評估」", officialSources.taipeiService)}</details>
+            <details><summary>可以同時參加臺北市另一個十二年就學安置嗎？</summary><p>簡章未規定一開始只能二選一；但若已獲十二年就學安置高級中等學校錄取並完成報到，就視同放棄服務群科管道。</p>${faqBasis("正式簡章 PDF 第 11 頁，「壹拾、注意事項」第 3 點", officialSources.taipeiService)}</details>
+            <details><summary>新北市學生也能報名嗎？</summary><p>符合簡章設籍、居住與鑑定資格者可以。高級中等學校服務群科對新北市學生的安置總名額至多 8 名；報名臺北市特殊教育學校者，須能至臺北市市區交通車接駁處。</p>${faqBasis("正式簡章 PDF 第 5、8 至 9 頁，「參、報名」及「陸、安置學校與安置原則」", officialSources.taipeiService)}</details>
+            <details><summary>高級中等學校可以填幾個志願？</summary><p>報名表列有 7 個高級中等學校志願欄位。安置時會參酌能力評估結果與志願，並依簡章所列階段辦理。</p>${faqBasis("正式簡章 PDF 第 9、13 頁，「安置原則」及附表 2 報名表", officialSources.taipeiService)}</details>
+            <details><summary>報到後還要注意什麼？</summary><p>須於 2026/6/15 前繳交國中畢業證書或修（結）業證書正本，未繳交者視同放棄。</p>${faqBasis("正式簡章 PDF 第 11 頁，「壹拾、注意事項」第 1 點", officialSources.taipeiService)}</details>
           </div>
           ${sourceNote("答案依簡章的評估、安置原則、報到與注意事項整理。", officialSources.taipeiService)}
         `
@@ -129,15 +133,15 @@ const guides = {
         `
       },
       faq: {
-        label: "常見問題",
-        title: "常見問題",
+        label: "簡章重點問答",
+        title: "簡章重點問答",
         body: `
           <div class="faq-list">
-            <details><summary>一般類科與服務群科可以同時報名嗎？</summary><p>不可以。新北市 115 學年度公告明定兩類只能擇一，不得重複，違者取消安置資格。</p></details>
-            <details><summary>一般類科什麼時候報名？</summary><p>網路報名為 2026/5/18 至 5/25，資料上傳為 5/26 至 6/2，與服務群科的三月報名不同。</p></details>
-            <details><summary>一般類科要填幾個志願？</summary><p>簡章以 8 至 16 個志願為原則；未填滿 8 個志願須另附切結書，也可能因志願不足而未獲安置。</p></details>
-            <details><summary>非應屆畢業生也可以申請嗎？</summary><p>可以，但設籍居住、學籍學歷、特教資格及過去是否參與適性輔導安置都有限制，須逐項符合。</p></details>
-            <details><summary>最新消息去哪裡看？</summary><p>以新北特殊教育資訊網的適性安置專區及新北市身心障礙學生適性輔導安置網為準。</p></details>
+            <details><summary>一般類科與服務群科可以同時報名嗎？</summary><p>不可以。新北市 115 學年度公告明定兩類只能擇一，不得重複，違者取消安置資格。</p>${faqBasis("正式簡章 PDF 第 7 至 8 頁，「報名注意事項」及「其他注意事項」", officialSources.newTaipeiGuide)}</details>
+            <details><summary>一般類科什麼時候報名？</summary><p>網路報名為 2026/5/18 至 5/25，資料上傳為 5/26 至 6/2，與服務群科的三月報名不同。</p>${faqBasis("正式簡章 PDF 第 3、5 頁，「辦理日程表」及「四、報名作業」", officialSources.newTaipeiGuide)}</details>
+            <details><summary>一般類科要填幾個志願？</summary><p>簡章以 8 至 16 個志願為原則；未填滿 8 個志願須另附切結書，也可能因志願不足而未獲安置。</p>${faqBasis("正式簡章 PDF 第 6 至 7 頁，「報名應繳資料」及「志願選填方式」", officialSources.newTaipeiGuide)}</details>
+            <details><summary>非應屆畢業生也可以申請嗎？</summary><p>可以，但設籍居住、學籍學歷、特教資格及過去是否參與適性輔導安置都有限制，須逐項符合。</p>${faqBasis("正式簡章 PDF 第 5 頁，「三、報名資格」第 2 項", officialSources.newTaipeiGuide)}</details>
+            <details><summary>最新消息去哪裡看？</summary><p>以新北特殊教育資訊網的適性安置專區及新北市身心障礙學生適性輔導安置網為準。</p>${faqBasis("正式簡章 PDF 第 1、5 頁，簡章封面及「二、安置學校及名額」", officialSources.newTaipeiGuide)}</details>
           </div>
           ${sourceNote("依一般類科簡章與新北市兩類簡章公告整理。", officialSources.newTaipeiGuide, "新北市官方簡章頁")}
         `
@@ -194,16 +198,16 @@ const guides = {
         `
       },
       faq: {
-        label: "常見問題",
-        title: "常見問題",
+        label: "簡章重點問答",
+        title: "簡章重點問答",
         body: `
           <div class="faq-list">
-            <details><summary>服務群科與一般類科可以同時報名嗎？</summary><p>不可以。新北市兩類簡章只能擇一，重複報名會取消安置資格與結果。</p></details>
-            <details><summary>所有人都要參加能力評估嗎？</summary><p>原則上要。國中安置集中式特教班，或因其他特殊情形無法參加者，可以依簡章提出免參加能力評估申請，仍須經審查。</p></details>
-            <details><summary>能力評估在評估什麼？</summary><p>包含基本學習能力（語文、數學、社會適應等）與職業能力，兩項各 50 分。</p></details>
-            <details><summary>可以填幾個志願？</summary><p>依能力評估的 A、B 切截分數而不同；免評估者與未達 B 者至多 3 個，其他組別依簡章可選學校範圍辦理。</p></details>
-            <details><summary>沒有在第一輪報名，還有機會嗎？</summary><p>若正式安置後仍有餘額，符合資格且未曾報名其他適性輔導安置者，可留意 5/26 至 6/2 的餘額安置報名。</p></details>
-            <details><summary>報到日期為什麼是一段期間？</summary><p>正式安置學生在 2026/6/8 至 6/26 期間，依各高中通知的日期與方式報到。</p></details>
+            <details><summary>服務群科與一般類科可以同時報名嗎？</summary><p>不可以。新北市兩類簡章只能擇一，重複報名會取消安置資格與結果。</p>${faqBasis("正式簡章 PDF 第 8、12 頁，「報名注意事項」及「其他注意事項」", officialSources.newTaipeiGuide)}</details>
+            <details><summary>所有人都要參加能力評估嗎？</summary><p>原則上要。國中安置集中式特教班，或因其他特殊情形無法參加者，可以依簡章提出免參加能力評估申請，仍須經審查。</p>${faqBasis("正式簡章 PDF 第 9 頁，「免參加能力評估申請」", officialSources.newTaipeiGuide)}</details>
+            <details><summary>能力評估在評估什麼？</summary><p>包含基本學習能力（語文、數學、社會適應等）與職業能力，兩項各 50 分。</p>${faqBasis("正式簡章 PDF 第 9 頁，「五、能力評估」第 4、7 項", officialSources.newTaipeiGuide)}</details>
+            <details><summary>可以填幾個志願？</summary><p>依能力評估的 A、B 切截分數而不同；免評估者與未達 B 者至多 3 個，其他組別依簡章可選學校範圍辦理。</p>${faqBasis("正式簡章 PDF 第 9 至 10 頁，「六、志願選填方式」", officialSources.newTaipeiGuide)}</details>
+            <details><summary>沒有在第一輪報名，還有機會嗎？</summary><p>若正式安置後仍有餘額，符合資格且未曾報名其他適性輔導安置者，可留意 5/26 至 6/2 的餘額安置報名。</p>${faqBasis("正式簡章 PDF 第 11 頁，「十、餘額安置」", officialSources.newTaipeiGuide)}</details>
+            <details><summary>報到日期為什麼是一段期間？</summary><p>正式安置學生在 2026/6/8 至 6/26 期間，依各高中通知的日期與方式報到。</p>${faqBasis("正式簡章 PDF 第 11 頁，「九、報到入學」", officialSources.newTaipeiGuide)}</details>
           </div>
           ${sourceNote("依服務群科簡章的能力評估、志願、報到與餘額安置規定整理。", officialSources.newTaipeiGuide, "新北市官方簡章頁")}
         `

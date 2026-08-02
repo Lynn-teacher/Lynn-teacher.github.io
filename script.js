@@ -160,7 +160,7 @@ const resources = [
 const infoRouteLabels = {
   eligibility: "申請資格",
   timeline: "重要時程",
-  faq: "常見問題"
+  faq: "簡章重點問答"
 };
 
 const officialGuideUrl =
@@ -179,6 +179,10 @@ function sourceNote(section, url = officialGuideUrl, label = "115 學年度正�
       <a href="${url}" target="_blank" rel="noreferrer">前往官方公告頁</a>
     </aside>
   `;
+}
+
+function faqBasis(text, url = officialGuideUrl) {
+  return `<p class="faq-basis"><span>依據</span><a href="${url}" target="_blank" rel="noreferrer">${text}</a></p>`;
 }
 
 const detailTemplates = {
@@ -365,28 +369,33 @@ const detailTemplates = {
   },
   faq: {
     eyebrow: "",
-    title: "常見問題",
+    title: "簡章重點問答",
     body: `
       <div class="faq-list">
         <details>
           <summary>這個管道是不是一定會安置？</summary>
           <p>不是。學生資格與志願適切性需經審核，且各校科各障礙類組有預估名額限制。經志願安置與逕予安置仍未獲安置者，需參加其他入學管道。</p>
+          ${faqBasis("正式簡章 PDF 第 11 至 12 頁，「晤談」及「陸、安置原則及作業方式」")}
         </details>
         <details>
           <summary>第 1、第 2 志願為什麼要同一相關群？</summary>
-          <p>簡章規定第 1、第 2 志願須為同一相關群，第 3 志願得跨其他相關群。網站可提醒家長選志願時先理解相關群與學生興趣、能力、支持需求的關係。</p>
+          <p>簡章規定第 1、第 2 志願須為同一相關群，第 3 志願得跨其他相關群。</p>
+          ${faqBasis("正式簡章 PDF 第 8 至 9 頁，「報名資料」")}
         </details>
         <details>
           <summary>可以同時報其他直轄市或教育部適性安置嗎？</summary>
           <p>簡章提醒，學生僅能於教育部國教署轄屬高級中等學校適性輔導安置或其他直轄市辦理之適性輔導安置擇一報名參加，違者取消入學資格。</p>
+          ${faqBasis("正式簡章 PDF 第 15 頁，「拾、其他注意事項」第 1 點")}
         </details>
         <details>
           <summary>安置後可以重新安置嗎？</summary>
-          <p>簡章明定學生已獲安置者，不得要求重新安置。報名前應充分了解志願、校科與學生需求。</p>
+          <p>簡章明定學生已獲安置者，不得要求重新安置。</p>
+          ${faqBasis("正式簡章 PDF 第 12 頁，「陸、安置原則及作業方式」第 1 項第 4 點")}
         </details>
         <details>
           <summary>沒有完成報到會怎樣？</summary>
           <p>經公告安置者若未於指定時間完成報到，視同放棄本就學安置入學資格。已報到者也需依安置學校時程繳交畢業證書或修結業證書正本。</p>
+          ${faqBasis("正式簡章 PDF 第 14 頁，「捌、報到」")}
         </details>
       </div>
       ${sourceNote("依簡章報名限制、志願規則、安置結果及報到規定整理。")}
