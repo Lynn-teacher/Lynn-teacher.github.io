@@ -1919,3 +1919,354 @@ footer p {
     gap: 2px 7px;
   }
 }
+
+/* County portal and switching */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.home-topbar {
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.city-switcher {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 650;
+}
+
+.city-switcher select {
+  min-width: 112px;
+  min-height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 6px 32px 6px 10px;
+  color: var(--ink);
+  background: var(--white);
+}
+
+.city-switcher select:focus-visible {
+  border-color: var(--blue);
+  outline: 2px solid rgba(97, 127, 150, 0.18);
+}
+
+.city-switcher.compact select {
+  min-width: 100px;
+  min-height: 34px;
+  font-size: 0.84rem;
+}
+
+.layer-nav-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+}
+
+.county-portal {
+  min-height: calc(100vh - 88px);
+  min-height: calc(100svh - 88px);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  background: var(--paper);
+}
+
+.county-stage {
+  width: min(960px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 42px 0 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.county-heading {
+  text-align: center;
+}
+
+.county-heading h1 {
+  margin: 0;
+  font-family: "Noto Serif TC", "Songti TC", serif;
+  font-size: 3rem;
+  font-weight: 600;
+  line-height: 1.24;
+  letter-spacing: 0;
+}
+
+.county-heading > p:last-child {
+  margin: 13px 0 0;
+  color: var(--muted);
+}
+
+.county-grid {
+  width: 100%;
+  margin-top: 34px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.county-card {
+  min-height: 176px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 25px 24px;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 14px;
+  text-decoration: none;
+  transition: border-color 0.18s ease, background-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.county-card.taipei {
+  border-color: #ddc8c4;
+  background: #f7e9e6;
+}
+
+.county-card.new-taipei {
+  border-color: #cadbcf;
+  background: #e9f1e7;
+}
+
+.county-card:hover,
+.county-card:focus-visible {
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.county-card.taipei:hover,
+.county-card.taipei:focus-visible {
+  border-color: #c99d96;
+  background: #f4e1dd;
+}
+
+.county-card.new-taipei:hover,
+.county-card.new-taipei:focus-visible {
+  border-color: #9db6a1;
+  background: #e2eddf;
+}
+
+.county-number {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.county-card strong,
+.county-card small {
+  display: block;
+}
+
+.county-card strong {
+  font-size: 1.65rem;
+  line-height: 1.25;
+}
+
+.county-card small {
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.county-status {
+  border: 1px solid rgba(75, 87, 82, 0.16);
+  border-radius: 6px;
+  padding: 3px 8px;
+  color: var(--muted);
+  background: rgba(255, 254, 250, 0.62);
+  font-size: 0.72rem;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.portal-footer .site-disclaimer-inner {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.route-choice {
+  margin-top: 20px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.route-choice article {
+  padding: 20px 22px;
+}
+
+.route-choice article + article {
+  border-left: 1px solid var(--line);
+}
+
+.route-choice strong {
+  display: block;
+  font-size: 1.02rem;
+}
+
+.route-choice p {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.route-timeline + .route-timeline {
+  margin-top: 48px;
+  border-top: 1px solid var(--line);
+  padding-top: 44px;
+}
+
+.route-heading {
+  margin-bottom: 18px;
+}
+
+.route-heading h3 {
+  margin: 5px 0 0;
+  font-size: 1.35rem;
+}
+
+.source-card a {
+  display: inline-block;
+  margin-top: 8px;
+  color: var(--blue-dark);
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.source-card a:hover,
+.source-card a:focus-visible {
+  text-decoration: underline;
+}
+
+.official-action {
+  margin-top: 22px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 18px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.official-action strong {
+  font-size: 1rem;
+}
+
+.official-action p {
+  margin: 3px 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+@media (max-width: 720px) {
+  .home-topbar {
+    gap: 10px;
+  }
+
+  .home-topbar .brand {
+    min-width: 0;
+    font-size: 0.94rem;
+    white-space: normal;
+  }
+
+  .home-topbar .brand-mark {
+    width: 26px;
+    height: 26px;
+    flex: 0 0 auto;
+  }
+
+  .city-switcher > span:not(.visually-hidden) {
+    display: none;
+  }
+
+  .city-switcher select {
+    min-width: 94px;
+  }
+
+  .layer-nav-actions {
+    gap: 8px;
+  }
+
+  .layer-nav-actions > span {
+    display: none;
+  }
+
+  .county-portal {
+    min-height: calc(100svh - 108px);
+  }
+
+  .county-stage {
+    width: calc(100% - 28px);
+    padding: 36px 0 48px;
+    justify-content: flex-start;
+  }
+
+  .county-heading h1 {
+    font-size: 2rem;
+  }
+
+  .county-heading > p:last-child {
+    max-width: 290px;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 0.92rem;
+  }
+
+  .county-grid {
+    margin-top: 27px;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .county-card {
+    min-height: 132px;
+    padding: 20px 18px;
+    grid-template-columns: 32px minmax(0, 1fr) auto;
+    gap: 9px;
+  }
+
+  .county-card strong {
+    font-size: 1.35rem;
+  }
+
+  .county-status {
+    padding-right: 6px;
+    padding-left: 6px;
+  }
+
+  .route-choice {
+    grid-template-columns: 1fr;
+  }
+
+  .route-choice article {
+    padding: 17px 0;
+  }
+
+  .route-choice article + article {
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
+
+  .official-action {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 12px;
+  }
+}

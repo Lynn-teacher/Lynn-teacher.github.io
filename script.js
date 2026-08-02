@@ -423,7 +423,7 @@ function showTopic(topicId, shouldScroll = false) {
     </div>
     <div class="detail-body">${topic.body}</div>
     <div class="detail-footer-actions">
-      <a class="button primary" href="#home">回到首頁</a>
+      <a class="button primary" href="#home">回到臺北市</a>
     </div>
   `;
   document.querySelector("#infoNavLabel").textContent =
@@ -650,6 +650,14 @@ function setupConsultation() {
   updatePreview();
 }
 
+function setupCitySwitcher() {
+  document.querySelectorAll(".city-switcher-select").forEach((select) => {
+    select.addEventListener("change", () => {
+      window.location.href = select.value;
+    });
+  });
+}
+
 function setActiveView(viewName, resetScroll = true) {
   document.querySelectorAll("[data-view]").forEach((view) => {
     view.hidden = view.dataset.view !== viewName;
@@ -694,6 +702,7 @@ function renderRoute() {
 
 setupSchoolFinder();
 setupConsultation();
+setupCitySwitcher();
 renderRoute();
 
 window.addEventListener("hashchange", renderRoute);
