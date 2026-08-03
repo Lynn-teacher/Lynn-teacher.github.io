@@ -1,6 +1,7 @@
 const officialSources = {
   taipeiService:
     "https://www.doe.gov.taipei/News_Content.aspx?n=FD0F0E4B643626CB&s=D3441D597AE8F8EF&sms=78D644F2755ACCAA",
+  taipeiPastTests: "https://proper.tp.edu.tw/Outer/NewsInfo/102",
   newTaipeiGuide: "https://sec.ntpc.edu.tw/p/405-1004-12330%2Cc969.php",
   newTaipeiPlacement: "https://seapc.ntpc.edu.tw/",
   newTaipeiServiceSeats: "https://sec.ntpc.edu.tw/p/406-1004-12671%2Cr43.php"
@@ -52,6 +53,13 @@ const guides = {
             <article class="timeline-item"><time><span class="timeline-date">2026/5/13</span></time><div><h3>安置學生報到</h3><p>高級中等學校為 9:00 至 15:00；特殊教育學校依通知單時間。</p></div></article>
             <article class="timeline-item"><time><span class="timeline-date">2026/6/15 前</span></time><div><h3>繳交國中畢業或修結業證書正本</h3><p>未在期限內繳交者，視同放棄本管道安置。</p></div></article>
           </div>
+          <aside class="official-action">
+            <div>
+              <strong>歷屆能力評估試題</strong>
+              <p>官方提供 96 至 113 年學習能力及職業能力評估試題，可用來認識題型。歷屆試題僅供參考，當年度評估內容與方式仍以正式簡章及通知為準。</p>
+            </div>
+            <a class="button primary" href="${officialSources.taipeiPastTests}" target="_blank" rel="noreferrer">查看官方歷屆試題</a>
+          </aside>
           ${sourceNote("依簡章重要時程表整理；個別通知時間仍以學校文件為準。", officialSources.taipeiService)}
         `
       },
