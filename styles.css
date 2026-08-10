@@ -2037,7 +2037,7 @@ footer p {
   width: 100%;
   margin-top: 28px;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
 }
 
@@ -2047,7 +2047,7 @@ footer p {
   border-radius: 8px;
   padding: 25px 24px;
   display: grid;
-  grid-template-columns: 42px minmax(0, 1fr);
+  grid-template-columns: 36px minmax(0, 1fr);
   align-items: center;
   gap: 14px;
   text-decoration: none;
@@ -2063,6 +2063,26 @@ footer p {
 .county-card.new-taipei {
   border-color: #cadbcf;
   background: #e9f1e7;
+}
+
+.county-card.taoyuan {
+  border-color: #d7d2b8;
+  background: #f4f0d9;
+}
+
+.county-card.taichung {
+  border-color: #c9d8df;
+  background: #e8f0f3;
+}
+
+.county-card.kaohsiung {
+  border-color: #decdb8;
+  background: #f4eadc;
+}
+
+.county-card.other-counties {
+  border-color: #d7cde0;
+  background: #eee8f2;
 }
 
 .county-card:hover,
@@ -2083,6 +2103,21 @@ footer p {
   background: #e2eddf;
 }
 
+.county-card.taoyuan:hover,
+.county-card.taoyuan:focus-visible {
+  border-color: #b8ae7f;
+  background: #eee8c7;
+}
+
+.county-card.is-pending {
+  position: relative;
+  cursor: default;
+}
+
+.county-card.is-pending:hover {
+  transform: none;
+}
+
 .county-number {
   color: var(--muted);
   font-size: 0.78rem;
@@ -2096,6 +2131,15 @@ footer p {
 .county-card strong {
   font-size: 1.65rem;
   line-height: 1.25;
+}
+
+.county-status {
+  position: absolute;
+  right: 16px;
+  bottom: 13px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
 }
 
 .portal-footer .site-disclaimer-inner {
@@ -2338,6 +2382,33 @@ footer p {
   background: #f7e9e6;
 }
 
+.route-card.special-school {
+  border-color: #cadbcf;
+  background: #e9f1e7;
+}
+
+.route-card-grid.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.route-card.is-pending {
+  position: relative;
+  cursor: default;
+}
+
+.route-card.is-pending:hover {
+  transform: none;
+}
+
+.route-card-status {
+  position: absolute;
+  right: 18px;
+  bottom: 16px;
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
 .route-card:hover,
 .route-card:focus-visible {
   transform: translateY(-2px);
@@ -2509,6 +2580,10 @@ footer p {
     margin-top: 25px;
     grid-template-columns: 1fr;
     gap: 10px;
+  }
+
+  .route-card-grid.three {
+    grid-template-columns: 1fr;
   }
 
   .route-card {
