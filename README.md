@@ -16,7 +16,7 @@
 
 新北市內容依[新北市 115 學年度身心障礙學生適性輔導安置簡章頁](https://sec.ntpc.edu.tw/p/406-1004-12330%2Cr43.php)及[新北市身心障礙學生適性輔導安置網](https://seapc.ntpc.edu.tw/)整理。
 
-桃園市入口依[桃園市身心障礙學生適性輔導安置網](https://tyshse.special.tyc.edu.tw/default.asp)公告的三類簡章架構建立，詳細內容整理中。
+桃園市高級中等學校內容依[115 學年度高級中等學校簡章](https://tyshse.special.tyc.edu.tw/%E7%B0%A1%E7%AB%A0/115/115%E5%AD%B8%E5%B9%B4%E5%BA%A6%E6%A1%83%E5%9C%92%E5%B8%82%E8%BA%AB%E5%BF%83%E9%9A%9C%E7%A4%99%E5%AD%B8%E7%94%9F%E9%81%A9%E6%80%A7%E8%BC%94%E5%B0%8E%E5%AE%89%E7%BD%AE%E9%AB%98%E7%B4%9A%E4%B8%AD%E7%AD%89%E5%AD%B8%E6%A0%A1%E7%B0%A1%E7%AB%A0.pdf)、[含缺額簡章](https://tyshse.special.tyc.edu.tw/%E7%B0%A1%E7%AB%A0/115/115%E5%AD%B8%E5%B9%B4%E5%BA%A6%E6%A1%83%E5%9C%92%E5%B8%82%E8%BA%AB%E5%BF%83%E9%9A%9C%E7%A4%99%E5%AD%B8%E7%94%9F%E9%81%A9%E6%80%A7%E8%BC%94%E5%B0%8E%E5%AE%89%E7%BD%AE%E9%AB%98%E7%B4%9A%E4%B8%AD%E7%AD%89%E5%AD%B8%E6%A0%A1%E7%B0%A1%E7%AB%A0%28%E5%90%AB%E7%BC%BA%E9%A1%8D%29.pdf)及[桃園市身心障礙學生適性輔導安置網](https://tyshse.special.tyc.edu.tw/default.asp)整理；另外兩類內容整理中。
 
 本站並非各縣市政府教育局官方網站，實際資格、日期及名額以官方最新公告為準。
 

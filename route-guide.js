@@ -4,7 +4,11 @@ const officialSources = {
   taipeiPastTests: "https://proper.tp.edu.tw/Outer/NewsInfo/102",
   newTaipeiGuide: "https://sec.ntpc.edu.tw/p/405-1004-12330%2Cc969.php",
   newTaipeiPlacement: "https://seapc.ntpc.edu.tw/",
-  newTaipeiServiceSeats: "https://sec.ntpc.edu.tw/p/406-1004-12671%2Cr43.php"
+  newTaipeiServiceSeats: "https://sec.ntpc.edu.tw/p/406-1004-12671%2Cr43.php",
+  taoyuanHighSchoolGuide:
+    "https://tyshse.special.tyc.edu.tw/%E7%B0%A1%E7%AB%A0/115/115%E5%AD%B8%E5%B9%B4%E5%BA%A6%E6%A1%83%E5%9C%92%E5%B8%82%E8%BA%AB%E5%BF%83%E9%9A%9C%E7%A4%99%E5%AD%B8%E7%94%9F%E9%81%A9%E6%80%A7%E8%BC%94%E5%B0%8E%E5%AE%89%E7%BD%AE%E9%AB%98%E7%B4%9A%E4%B8%AD%E7%AD%89%E5%AD%B8%E6%A0%A1%E7%B0%A1%E7%AB%A0.pdf",
+  taoyuanHighSchoolSeats:
+    "https://tyshse.special.tyc.edu.tw/%E7%B0%A1%E7%AB%A0/115/115%E5%AD%B8%E5%B9%B4%E5%BA%A6%E6%A1%83%E5%9C%92%E5%B8%82%E8%BA%AB%E5%BF%83%E9%9A%9C%E7%A4%99%E5%AD%B8%E7%94%9F%E9%81%A9%E6%80%A7%E8%BC%94%E5%B0%8E%E5%AE%89%E7%BD%AE%E9%AB%98%E7%B4%9A%E4%B8%AD%E7%AD%89%E5%AD%B8%E6%A0%A1%E7%B0%A1%E7%AB%A0%28%E5%90%AB%E7%BC%BA%E9%A1%8D%29.pdf"
 };
 
 function sourceNote(text, url, label = "115 學年度官方簡章") {
@@ -218,6 +222,75 @@ const guides = {
             <details><summary>報到日期為什麼是一段期間？</summary><p>正式安置學生在 2026/6/8 至 6/26 期間，依各高中通知的日期與方式報到。</p>${faqBasis("正式簡章 PDF 第 11 頁，「九、報到入學」", officialSources.newTaipeiGuide)}</details>
           </div>
           ${sourceNote("依服務群科簡章的能力評估、志願、報到與餘額安置規定整理。", officialSources.newTaipeiGuide, "新北市官方簡章頁")}
+        `
+      }
+    }
+  },
+
+  "taoyuan-high-school": {
+    title: "桃園市高級中等學校適性輔導安置",
+    shortTitle: "桃園市高級中等學校",
+    topics: {
+      eligibility: {
+        label: "申請資格",
+        title: "先確認是否適用這一類",
+        body: `
+          <p class="detail-lead">這一類適用於鑑定證明不含智能障礙類的學生。報名資格需要同時符合，應屆與非應屆學生的通報條件也不同。</p>
+          <div class="detail-grid two">
+            <article class="info-card"><span class="tag">學歷身分</span><h4>應屆或未曾參加者</h4><ul><li>應屆國中畢業生可申請。</li><li>非應屆者須未曾參加本安置，並具國中畢（修）業或同等學力。</li></ul></article>
+            <article class="info-card"><span class="tag">特教資格</span><h4>通報與類別都要符合</h4><ul><li>應屆生須在 2025/12/31 前完成特教通報網登錄。</li><li>非應屆者須曾於國中教育階段登錄，且障礙類別符合本簡章。</li></ul></article>
+            <article class="info-card"><span class="tag">鑑定證明</span><h4>不含智能障礙類</h4><ul><li>須持有鑑輔會核發的特教學生鑑定證明。</li><li>鑑定證明不得包含智能障礙類。</li></ul></article>
+            <article class="info-card"><span class="tag">報名方式</span><h4>由原國中協助</h4><ul><li>應屆生由原就讀國中辦理線上報名與資料繳交。</li><li>跨縣市或非應屆情形，請先請原國中依簡章確認。</li></ul></article>
+          </div>
+          <p class="note-box">桃園市的高級中等學校、集中式特教班與特殊教育學校三類簡章只能選擇一種；也不得重複參加其他直轄市或國教署辦理的適性安置。</p>
+          ${sourceNote("依正式簡章第 5 至 7 頁的報名資格與注意事項整理。", officialSources.taoyuanHighSchoolGuide)}
+        `
+      },
+      timeline: {
+        label: "重要時程",
+        title: "重要時程",
+        body: `
+          <div class="timeline">
+            <article class="timeline-item"><time><span class="timeline-date">2026/1/26</span><span class="timeline-date">2026/2/26</span></time><div><h3>線上報名</h3><p>由國中協助完成；校內收件時間請依原國中通知。</p></div></article>
+            <article class="timeline-item"><time><span class="timeline-date">2026/3/2</span><span class="timeline-date">2026/3/6</span></time><div><h3>桃園市國中繳交報名資料</h3><p>完成報名表與應繳文件送件。</p></div></article>
+            <article class="timeline-item"><time><span class="timeline-date">2026/4/30 前</span></time><div><h3>必要時進行面談</h3><p>依各安置學校通知辦理。</p></div></article>
+            <article class="timeline-item"><time><span class="timeline-date">2026/6/1</span></time><div><h3>公告安置結果</h3><p>同時由主辦單位寄發安置結果通知給國中。</p></div></article>
+            <article class="timeline-item"><time><span class="timeline-date">2026/7/8</span><span class="timeline-date">2026/7/9</span></time><div><h3>至安置學校報到</h3><p>請依分發學校通知的時間與方式完成報到。</p></div></article>
+            <article class="timeline-item"><time><span class="timeline-date">2026/7/6</span><span class="timeline-date">2026/7/10</span></time><div><h3>餘額安置報名</h3><p>未獲安置且符合資格者，可留意後續餘額安置。</p></div></article>
+          </div>
+          ${sourceNote("依正式簡章辦理日程表整理；各國中與安置學校的校內作業時間仍以通知為準。", officialSources.taoyuanHighSchoolGuide)}
+        `
+      },
+      schools: {
+        label: "學校與名額",
+        title: "1,075 個高級中等學校名額",
+        body: `
+          <p class="detail-lead">115 學年度官方名額表列出 149 個高級中等學校校科志願、共 1,075 名；另有實用技能學程 21 個校科志願、共 112 名。</p>
+          <div class="detail-grid two">
+            <article class="info-card"><span class="tag">高級中等學校</span><h4>1,075 名</h4><p>共有 149 個校科志願，包含學術、機械、電機電子、商管、外語、設計、餐旅等群別。</p></article>
+            <article class="info-card"><span class="tag">實用技能學程</span><h4>112 名</h4><p>共有 21 個校科志願，包含美容造型、動力機械、電機電子、餐旅、商業與農業群。</p></article>
+          </div>
+          <div class="detail-grid two">
+            <article class="info-card"><span class="tag">群別選擇</span><h4>最多選 3 個群別</h4><p>第 1 至第 3 志願必須填同一群別；從第 4 志願起，可填所選 3 個群別內的校科。</p></article>
+            <article class="info-card"><span class="tag">志願數</span><h4>至少 15 個、至多 30 個</h4><p>志願太少可能影響安置機會；填寫時可和國中老師一起確認排序。</p></article>
+          </div>
+          <aside class="official-action"><div><strong>查看完整校科與預估安置名額</strong><p>校名、科別與名額以官方「含缺額」簡章為準。</p></div><a class="button primary" href="${officialSources.taoyuanHighSchoolSeats}" target="_blank" rel="noreferrer">查看官方名額表</a></aside>
+          ${sourceNote("名額、校科志願數與群別規則依官方含缺額簡章及正式簡章整理。", officialSources.taoyuanHighSchoolSeats, "115 學年度官方含缺額簡章")}
+        `
+      },
+      faq: {
+        label: "簡章重點問答",
+        title: "簡章重點問答",
+        body: `
+          <div class="faq-list">
+            <details><summary>可以同時報名桃園市其他兩類安置嗎？</summary><p>不可以。高級中等學校、集中式特教班與特殊教育學校三類只能選擇一種報名；也不得重複參加其他直轄市或國教署的適性安置。</p>${faqBasis("正式簡章 PDF 第 9 頁，「注意事項」", officialSources.taoyuanHighSchoolGuide)}</details>
+            <details><summary>這一類適合哪些學生？</summary><p>申請者須持有不含智能障礙類的特教學生鑑定證明，並符合應屆或非應屆的通報、學歷等條件。</p>${faqBasis("正式簡章 PDF 第 5 頁，「參、報名」", officialSources.taoyuanHighSchoolGuide)}</details>
+            <details><summary>志願要填幾個？</summary><p>至少填 15 個、至多 30 個志願；最多選擇 3 個群別，且前 3 個志願須屬於同一群別。</p>${faqBasis("正式簡章 PDF 第 7 頁，「志願選填」", officialSources.taoyuanHighSchoolGuide)}</details>
+            <details><summary>沒有分到前面志願時怎麼辦？</summary><p>若因志願太少或熱門校科未獲安置，學生須依規定調整志願；調整後仍未獲安置者，會進行面談。</p>${faqBasis("正式簡章 PDF 第 8 頁，「安置原則」", officialSources.taoyuanHighSchoolGuide)}</details>
+            <details><summary>還可以參加免試入學或特色招生嗎？</summary><p>可以同時報名其他入學管道；若同時錄取，最後只能選擇一個安置或入學結果完成報到。</p>${faqBasis("正式簡章 PDF 第 9 頁，「注意事項」", officialSources.taoyuanHighSchoolGuide)}</details>
+            <details><summary>錯過第一輪還有機會嗎？</summary><p>未參加本安置、未透過其他入學管道錄取且符合資格者，可留意正式安置後的餘額安置公告。</p>${faqBasis("正式簡章 PDF 第 9 至 10 頁，「餘額安置」", officialSources.taoyuanHighSchoolGuide)}</details>
+          </div>
+          ${sourceNote("各題依正式簡章的報名、志願、安置、報到與餘額安置規定整理。", officialSources.taoyuanHighSchoolGuide)}
         `
       }
     }
