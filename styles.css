@@ -1922,6 +1922,25 @@ footer p {
   text-decoration: underline;
 }
 
+.footer-meta a[href*="docs.google.com/forms"] {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 4px 10px;
+  border: 1px solid #d39b8c;
+  border-radius: 5px;
+  background: #f8e5df;
+  color: #79483e;
+  font-weight: 700;
+}
+
+.footer-meta a[href*="docs.google.com/forms"]:hover,
+.footer-meta a[href*="docs.google.com/forms"]:focus-visible {
+  background: #efd1c8;
+  color: #5f372f;
+  text-decoration: none;
+}
+
 .site-disclaimer span {
   white-space: nowrap;
 }
