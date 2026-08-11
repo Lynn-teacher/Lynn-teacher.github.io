@@ -5,6 +5,7 @@ const officialSources = {
   newTaipeiGuide: "https://sec.ntpc.edu.tw/p/405-1004-12330%2Cc969.php",
   newTaipeiPlacement: "https://seapc.ntpc.edu.tw/",
   newTaipeiServiceSeats: "https://sec.ntpc.edu.tw/p/406-1004-12671%2Cr43.php",
+  newTaipeiGeneralSeats: "https://sec.ntpc.edu.tw/p/406-1004-12516%2Cr272.php",
   taoyuanHighSchoolGuide:
     "https://tyshse.special.tyc.edu.tw/%E7%B0%A1%E7%AB%A0/115/115%E5%AD%B8%E5%B9%B4%E5%BA%A6%E6%A1%83%E5%9C%92%E5%B8%82%E8%BA%AB%E5%BF%83%E9%9A%9C%E7%A4%99%E5%AD%B8%E7%94%9F%E9%81%A9%E6%80%A7%E8%BC%94%E5%B0%8E%E5%AE%89%E7%BD%AE%E9%AB%98%E7%B4%9A%E4%B8%AD%E7%AD%89%E5%AD%B8%E6%A0%A1%E7%B0%A1%E7%AB%A0.pdf",
   taoyuanHighSchoolSeats:
@@ -22,6 +23,104 @@ function sourceNote(text, url, label = "115 學年度官方簡章") {
 
 function faqBasis(text, url) {
   return `<p class="faq-basis"><span>依據</span><a href="${url}" target="_blank" rel="noreferrer">${text}</a></p>`;
+}
+
+function newTaipeiSchoolFinderTemplate(type) {
+  const isGeneral = type === "general";
+  const officialUrl = isGeneral
+    ? officialSources.newTaipeiGeneralSeats
+    : officialSources.newTaipeiServiceSeats;
+  const officialLabel = isGeneral ? "查看官方一般類科名額" : "查看官方服務群科名額";
+  const description = isGeneral
+    ? "輸入校名或科別，再依分區、學校類型或群別縮小範圍。"
+    : "輸入校名，再依學校類型縮小範圍。服務群科名額請以官方公告為準。";
+
+  return `
+    <section class="school-finder guide-school-finder" data-new-taipei-school-finder="${type}" aria-labelledby="newTaipeiFinderTitle">
+      <div class="finder-heading">
+        <div><h3 id="newTaipeiFinderTitle">可選學校與校科</h3><p>${description}</p></div>
+        <a class="text-link" href="${officialUrl}" target="_blank" rel="noreferrer">${officialLabel}</a>
+      </div>
+      <div class="finder-controls" aria-label="校科篩選條件">
+        <label class="search-box"><span>搜尋學校或科別</span><input data-school-search type="search" placeholder="例如：三重商工、餐飲、普通科" /></label>
+        <label class="search-box" data-school-filter="district"><span>九大分區</span><select data-school-district><option value="all">全部分區</option></select></label>
+        <label class="search-box" data-school-filter="kind"><span>學校類型</span><select data-school-kind><option value="all">全部類型</option></select></label>
+        <label class="search-box" data-school-filter="group"><span>群別</span><select data-school-group><option value="all">全部群別</option></select></label>
+      </div>
+      <div class="finder-summary" data-school-summary aria-live="polite"></div>
+      <div class="school-results" data-school-results></div>
+      <button class="button secondary load-more" data-school-more type="button" hidden>顯示更多校科</button>
+      <p class="empty-state" data-school-empty hidden>找不到符合條件的學校或校科，可以減少篩選條件或換個關鍵字。</p>
+      <p class="finder-note">名額不等於保證安置；實際結果仍依鑑輔小組審核與新北市最新公告為準。</p>
+    </section>
+  `;
+}
+
+function bindNewTaipeiSchoolFinder() {
+  const finder = detail.querySelector("[data-new-taipei-school-finder]");
+  if (!finder || typeof newTaipeiSchoolData === "undefined") return;
+
+  const rows = newTaipeiSchoolData[finder.dataset.newTaipeiSchoolFinder] || [];
+  const search = finder.querySelector("[data-school-search]");
+  const district = finder.querySelector("[data-school-district]");
+  const kind = finder.querySelector("[data-school-kind]");
+  const group = finder.querySelector("[data-school-group]");
+  const summary = finder.querySelector("[data-school-summary]");
+  const results = finder.querySelector("[data-school-results]");
+  const more = finder.querySelector("[data-school-more]");
+  const empty = finder.querySelector("[data-school-empty]");
+  let visibleCount = 20;
+
+  const populate = (control, values, emptyLabel) => {
+    if (values.length < 2) {
+      control.closest("[data-school-filter]").hidden = true;
+      return;
+    }
+    control.insertAdjacentHTML("beforeend", values.map((value) => `<option value="${value}">${value}</option>`).join(""));
+    control.querySelector("option").textContent = emptyLabel;
+  };
+
+  populate(district, [...new Set(rows.map((row) => row.district).filter(Boolean))], "全部分區");
+  populate(kind, [...new Set(rows.map((row) => row.kind).filter(Boolean))], "全部類型");
+  populate(group, [...new Set(rows.map((row) => row.group).filter(Boolean))], "全部群別");
+
+  const render = () => {
+    const keyword = search.value.trim().toLowerCase();
+    const filtered = rows.filter((row) => {
+      const searchable = `${row.school} ${row.program} ${row.group} ${row.kind} ${row.district}`.toLowerCase();
+      return searchable.includes(keyword)
+        && (district.value === "all" || row.district === district.value)
+        && (kind.value === "all" || row.kind === kind.value)
+        && (group.value === "all" || row.group === group.value);
+    });
+    const visibleRows = filtered.slice(0, visibleCount);
+    const schoolCount = new Set(filtered.map((row) => row.school)).size;
+    const seatCount = filtered.reduce((total, row) => total + (Number.isFinite(row.seats) ? row.seats : 0), 0);
+    const hasSeats = filtered.some((row) => Number.isFinite(row.seats));
+
+    summary.textContent = hasSeats
+      ? `115 學年度官方資料｜找到 ${schoolCount} 所學校、${filtered.length} 筆校科資料，合計 ${seatCount} 名`
+      : `115 學年度官方資料｜找到 ${schoolCount} 所學校`;
+    results.innerHTML = visibleRows.map((row) => {
+      const tags = [row.district, row.kind, row.group].filter(Boolean).map((tag) => `<span>${tag}</span>`).join("");
+      const seats = Number.isFinite(row.seats) ? `實際開缺 ${row.seats} 名` : "名額請以官方公告為準";
+      return `<article class="school-result guide-school-result"><div class="result-main"><div class="result-tags">${tags}</div><h3>${row.school}</h3><p>${row.program}</p></div><strong class="selected-seat">${seats}</strong></article>`;
+    }).join("");
+    empty.hidden = filtered.length > 0;
+    more.hidden = filtered.length <= visibleCount;
+  };
+
+  [search, district, kind, group].forEach((control) => {
+    control.addEventListener(control.tagName === "INPUT" ? "input" : "change", () => {
+      visibleCount = 20;
+      render();
+    });
+  });
+  more.addEventListener("click", () => {
+    visibleCount += 20;
+    render();
+  });
+  render();
 }
 
 const guides = {
@@ -133,15 +232,11 @@ const guides = {
       },
       schools: {
         label: "學校與名額",
-        title: "學校與名額要看年度開缺公告",
+        title: "1,115 個一般類科安置名額",
         body: `
-          <p class="detail-lead">一般類科的校科與名額會另外公告。查詢時請先確認檔名與頁面都標示「一般類科」，不要誤用服務群科名額。</p>
-          <div class="detail-grid two">
-            <article class="info-card source-card"><span class="tag">官方公告</span><h4>新北特殊教育資訊網</h4><p>查看簡章、開缺名額、安置結果與最新修正。</p><a href="${officialSources.newTaipeiGuide}" target="_blank" rel="noreferrer">開啟官方簡章頁</a></article>
-            <article class="info-card source-card"><span class="tag">作業系統</span><h4>適性輔導安置網</h4><p>報名、志願選填與結果查詢的官方系統。</p><a href="${officialSources.newTaipeiPlacement}" target="_blank" rel="noreferrer">前往官方系統</a></article>
-          </div>
-          <p class="note-box">名額是年度資料，可能在作業期間修正；家長最後仍應以國中承辦教師下載的當次官方檔案為準。</p>
-          ${sourceNote("校科與名額以新北市年度公告及系統資料為準。", officialSources.newTaipeiGuide, "新北市官方簡章頁")}
+          <p class="detail-lead">一般類科可填到科別。下方依官方公告整理 165 筆校科資料、共 1,115 名，並保留分區、學校類型與群別篩選。</p>
+          ${newTaipeiSchoolFinderTemplate("general")}
+          ${sourceNote("校科與實際開缺名額依新北市 115 學年度一般類科安置名額公告整理。", officialSources.newTaipeiGeneralSeats, "新北市官方一般類科名額公告")}
         `
       },
       faq: {
@@ -200,7 +295,7 @@ const guides = {
         title: "簡章列 12 校，名額另行公告",
         body: `
           <p class="detail-lead">簡章附錄列出 12 所學校、共 28 班；實際安置名額於 2026/2/26 前另行公告。志願範圍會依能力評估結果或免評估身分而不同。</p>
-          <div class="school-name-grid"><span>三重商工</span><span>石碇高中</span><span>光復高中</span><span>泰山高中</span><span>淡水商工</span><span>新北特殊教育學校</span><span>新北高工</span><span>瑞芳高工</span><span>鶯歌工商</span><span>安康高中</span><span>清水高中</span><span>樹林高中</span></div>
+          ${newTaipeiSchoolFinderTemplate("service")}
           <div class="detail-grid two">
             <article class="info-card"><span class="tag">參加能力評估</span><h4>依切截分數選填</h4><p>達 A、達 B 未達 A、未達 B 三種結果，可選填的學校序號及志願數不同。</p></article>
             <article class="info-card"><span class="tag">免參加能力評估</span><h4>依就近順位選填</h4><p>至多填 3 個志願，安置會依學籍、戶籍與簡章所列就近順位辦理。</p></article>
@@ -322,6 +417,7 @@ function renderGuideRoute() {
     <div class="detail-body">${topic.body}</div>
     <div class="detail-footer-actions"><a class="button primary" href="#home">回到四個主題</a></div>
   `;
+  bindNewTaipeiSchoolFinder();
   document.querySelector("#guideNavLabel").textContent = topic.label;
   setGuideView("info");
   document.title = `${topic.label}｜${guide.shortTitle}`;

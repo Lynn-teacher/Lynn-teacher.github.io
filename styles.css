@@ -845,6 +845,10 @@ footer p {
   text-decoration: none;
 }
 
+.school-result.guide-school-result {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
 .load-more {
   margin: 18px auto 0;
 }
