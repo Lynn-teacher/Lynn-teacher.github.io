@@ -2103,6 +2103,11 @@ footer p {
   background: #f4eadc;
 }
 
+.county-card.tainan {
+  border-color: #d8c6cb;
+  background: #f5e9eb;
+}
+
 .county-card.other-counties {
   border-color: #d7cde0;
   background: #eee8f2;
