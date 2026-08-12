@@ -2034,7 +2034,7 @@ footer p {
 }
 
 .county-stage {
-  width: min(960px, calc(100% - 40px));
+  width: min(1120px, calc(100% - 40px));
   margin: 0 auto;
   padding: 42px 0 64px;
   display: flex;
@@ -2058,21 +2058,21 @@ footer p {
 
 .county-grid {
   width: 100%;
-  margin-top: 28px;
+  margin-top: 24px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
 }
 
 .county-card {
-  min-height: 150px;
+  min-height: 116px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  padding: 25px 24px;
+  padding: 19px 18px;
   display: grid;
-  grid-template-columns: 36px minmax(0, 1fr);
+  grid-template-columns: 30px minmax(0, 1fr);
   align-items: center;
-  gap: 14px;
+  gap: 10px;
   text-decoration: none;
   transition: border-color 0.18s ease, background-color 0.18s ease,
     transform 0.18s ease;
@@ -2157,7 +2157,7 @@ footer p {
 }
 
 .county-card strong {
-  font-size: 1.65rem;
+  font-size: 1.42rem;
   line-height: 1.25;
 }
 
@@ -2300,19 +2300,19 @@ footer p {
 
   .county-grid {
     margin-top: 27px;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
   }
 
   .county-card {
-    min-height: 112px;
-    padding: 20px 18px;
-    grid-template-columns: 32px minmax(0, 1fr);
+    min-height: 96px;
+    padding: 16px 14px;
+    grid-template-columns: 28px minmax(0, 1fr);
     gap: 9px;
   }
 
   .county-card strong {
-    font-size: 1.35rem;
+    font-size: 1.18rem;
   }
 
   .route-choice {
