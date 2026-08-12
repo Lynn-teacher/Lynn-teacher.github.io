@@ -31,42 +31,99 @@ function faqBasis(text, url) {
   return `<p class="faq-basis"><span>依據</span><a href="${url}" target="_blank" rel="noreferrer">${text}</a></p>`;
 }
 
-function newTaipeiSchoolFinderTemplate(type) {
-  const isGeneral = type === "general";
-  const officialUrl = isGeneral
-    ? officialSources.newTaipeiGeneralSeats
-    : officialSources.newTaipeiServiceSeats;
-  const officialLabel = isGeneral ? "查看官方一般類科名額" : "查看官方服務群科名額";
-  const description = isGeneral
-    ? "輸入校名或科別，再依分區、學校類型或群別縮小範圍。"
-    : "輸入校名，再依學校類型縮小範圍。名額分為第一、第二階段，請依能力評估結果與簡章規定選填。";
-
+function schoolFinderTemplate({ source, type, title, description, officialUrl, officialLabel, note, placeholder = "例如：三重商工、餐飲、普通科" }) {
   return `
-    <section class="school-finder guide-school-finder" data-new-taipei-school-finder="${type}" aria-labelledby="newTaipeiFinderTitle">
+    <section class="school-finder guide-school-finder" data-school-finder-source="${source}" data-school-finder-type="${type}" aria-labelledby="schoolFinderTitle">
       <div class="finder-heading">
-        <div><h3 id="newTaipeiFinderTitle">${isGeneral ? "可選學校與校科" : "可選學校與安置名額"}</h3><p>${description}</p></div>
+        <div><h3 id="schoolFinderTitle">${title}</h3><p>${description}</p></div>
         <a class="text-link" href="${officialUrl}" target="_blank" rel="noreferrer">${officialLabel}</a>
       </div>
       <div class="finder-controls" aria-label="校科篩選條件">
-        <label class="search-box"><span>搜尋學校或科別</span><input data-school-search type="search" placeholder="例如：三重商工、餐飲、普通科" /></label>
-        <label class="search-box" data-school-filter="district"><span>九大分區</span><select data-school-district><option value="all">全部分區</option></select></label>
+        <label class="search-box"><span>搜尋學校或科別</span><input data-school-search type="search" placeholder="${placeholder}" /></label>
+        <label class="search-box" data-school-filter="district"><span>分區</span><select data-school-district><option value="all">全部分區</option></select></label>
         <label class="search-box" data-school-filter="kind"><span>學校類型</span><select data-school-kind><option value="all">全部類型</option></select></label>
-        <label class="search-box" data-school-filter="group"><span>群別</span><select data-school-group><option value="all">全部群別</option></select></label>
+        <label class="search-box" data-school-filter="group"><span>群別／技能領域</span><select data-school-group><option value="all">全部群別</option></select></label>
       </div>
       <div class="finder-summary" data-school-summary aria-live="polite"></div>
       <div class="school-results" data-school-results></div>
       <button class="button secondary load-more" data-school-more type="button" hidden>顯示更多校科</button>
       <p class="empty-state" data-school-empty hidden>找不到符合條件的學校或校科，可以減少篩選條件或換個關鍵字。</p>
-      <p class="finder-note">名額不等於保證安置；實際結果仍依鑑輔小組審核與新北市最新公告為準。</p>
+      <p class="finder-note">${note}</p>
     </section>
   `;
 }
 
-function bindNewTaipeiSchoolFinder() {
-  const finder = detail.querySelector("[data-new-taipei-school-finder]");
-  if (!finder || typeof newTaipeiSchoolData === "undefined") return;
+function newTaipeiSchoolFinderTemplate(type) {
+  const isGeneral = type === "general";
+  return schoolFinderTemplate({
+    source: "newTaipei",
+    type,
+    title: isGeneral ? "可選學校與校科" : "可選學校與安置名額",
+    description: isGeneral
+      ? "輸入校名或科別，再依分區、學校類型或群別縮小範圍。"
+      : "輸入校名，再依學校類型縮小範圍。名額分為第一、第二階段，請依能力評估結果與簡章規定選填。",
+    officialUrl: isGeneral ? officialSources.newTaipeiGeneralSeats : officialSources.newTaipeiServiceSeats,
+    officialLabel: isGeneral ? "查看官方一般類科名額" : "查看官方服務群科名額",
+    note: "名額不等於保證安置；實際結果仍依鑑輔小組審核與新北市最新公告為準。"
+  });
+}
 
-  const rows = newTaipeiSchoolData[finder.dataset.newTaipeiSchoolFinder] || [];
+function taoyuanSchoolFinderTemplate(type) {
+  const isHighSchool = type === "highSchool";
+  return schoolFinderTemplate({
+    source: "taoyuan",
+    type,
+    title: isHighSchool ? "可選學校、校科與名額" : "可選學校與安置名額",
+    description: isHighSchool
+      ? "輸入校名或科別，再依學程、群別或學校縮小範圍。"
+      : "輸入校名、科別或技能領域，查看各開缺學校與安置名額。",
+    officialUrl: isHighSchool ? officialSources.taoyuanHighSchoolSeats : officialSources.taoyuanServiceSeats,
+    officialLabel: isHighSchool ? "查看官方含缺額簡章" : "查看官方含缺額簡章",
+    note: "名額不等於保證安置；實際結果仍依鑑定安置工作小組與桃園市最新公告為準。",
+    placeholder: isHighSchool ? "例如：中壢高商、餐飲、普通科" : "例如：龍潭高中、餐飲、門市"
+  });
+}
+
+function taipeiServiceSchoolFinderTemplate() {
+  return schoolFinderTemplate({
+    source: "taipeiService",
+    type: "service",
+    title: "可選學校與科別",
+    description: "輸入校名或科別，再依安置學校類型縮小範圍。",
+    officialUrl: officialSources.taipeiService,
+    officialLabel: "查看正式簡章",
+    note: "高級中等學校服務群科與特殊教育學校的評估、安置方式不同，請一併參考本頁說明。",
+    placeholder: "例如：大安高工、餐飲、門市"
+  });
+}
+
+const taipeiServiceSchoolData = [
+  { school: "士林高商", program: "門市服務科", kind: "高級中等學校", group: "服務群科", seats: null },
+  { school: "大安高工", program: "餐飲服務科", kind: "高級中等學校", group: "服務群科", seats: null },
+  { school: "木柵高工", program: "餐飲服務科", kind: "高級中等學校", group: "服務群科", seats: null },
+  { school: "內湖高工", program: "門市服務科", kind: "高級中等學校", group: "服務群科", seats: null },
+  { school: "松山工農", program: "餐飲服務科", kind: "高級中等學校", group: "服務群科", seats: null },
+  { school: "松山家商", program: "餐飲服務科", kind: "高級中等學校", group: "服務群科", seats: null },
+  { school: "南港高工", program: "門市服務科", kind: "高級中等學校", group: "服務群科", seats: null },
+  { school: "文山特殊教育學校", program: "餐飲服務科、居家生活服務科", kind: "特殊教育學校", group: "服務群科", seats: null },
+  { school: "臺北特殊教育學校", program: "餐飲服務科、居家生活服務科", kind: "特殊教育學校", group: "服務群科", seats: null }
+];
+
+function getSchoolFinderRows(finder) {
+  const source = finder.dataset.schoolFinderSource;
+  const type = finder.dataset.schoolFinderType;
+  if (source === "newTaipei" && typeof newTaipeiSchoolData !== "undefined") return newTaipeiSchoolData[type] || [];
+  if (source === "taoyuan" && typeof taoyuanSchoolData !== "undefined") return taoyuanSchoolData[type] || [];
+  if (source === "taipeiService") return taipeiServiceSchoolData;
+  return [];
+}
+
+function bindSchoolFinder() {
+  const finder = detail.querySelector("[data-school-finder-source]");
+  if (!finder) return;
+
+  const rows = getSchoolFinderRows(finder);
+  if (!rows.length) return;
   const search = finder.querySelector("[data-school-search]");
   const district = finder.querySelector("[data-school-district]");
   const kind = finder.querySelector("[data-school-kind]");
@@ -104,7 +161,7 @@ function bindNewTaipeiSchoolFinder() {
     const seatCount = filtered.reduce((total, row) => total + (Number.isFinite(row.seats) ? row.seats : 0), 0);
     const hasSeats = filtered.some((row) => Number.isFinite(row.seats));
 
-    const recordLabel = finder.dataset.newTaipeiSchoolFinder === "service" ? "筆安置資料" : "筆校科資料";
+    const recordLabel = finder.dataset.schoolFinderType === "service" ? "筆安置資料" : "筆校科資料";
     summary.textContent = hasSeats
       ? `115 學年度官方資料｜找到 ${schoolCount} 所學校、${filtered.length} ${recordLabel}，合計 ${seatCount} 名`
       : `115 學年度官方資料｜找到 ${schoolCount} 所學校`;
@@ -178,10 +235,7 @@ const guides = {
         title: "9 所學校，分成兩種安置方式",
         body: `
           <p class="detail-lead">簡章列出 7 所高級中等學校及 2 所特殊教育學校。高級中等學校須參加能力評估；特殊教育學校依學區安置，入學後再評估分科。</p>
-          <div class="school-list-columns">
-            <section><h3>高級中等學校服務群科</h3><ul><li>士林高商｜門市服務科</li><li>大安高工｜餐飲服務科</li><li>木柵高工｜餐飲服務科</li><li>內湖高工｜門市服務科</li><li>松山工農｜餐飲服務科</li><li>松山家商｜餐飲服務科</li><li>南港高工｜門市服務科</li></ul><p>共 7 班，每班安置名額以 8 至 15 名為原則，由鑑輔小組依當年度評估情形決定。</p></section>
-            <section><h3>特殊教育學校服務群科</h3><ul><li>文山特殊教育學校｜餐飲服務科、居家生活服務科</li><li>臺北特殊教育學校｜餐飲服務科、居家生活服務科</li></ul><p>共 11 班，每班以 12 人為原則；臺北市學生依學區安置，新北市學生以就近安置為原則。</p></section>
-          </div>
+          ${taipeiServiceSchoolFinderTemplate()}
           <p class="note-box">校名、科別與班級數可以先用來認識選項；實際安置人數及結果仍以鑑輔小組與教育局公告為準。</p>
           ${sourceNote("依簡章第 4 至 5 頁及各校服務群科簡介整理。", officialSources.taipeiService)}
         `
@@ -367,16 +421,12 @@ const guides = {
         label: "學校與名額",
         title: "1,075 個高級中等學校名額",
         body: `
-          <p class="detail-lead">115 學年度官方名額表列出 149 個高級中等學校校科志願、共 1,075 名；另有實用技能學程 21 個校科志願、共 112 名。</p>
-          <div class="detail-grid two">
-            <article class="info-card"><span class="tag">高級中等學校</span><h4>1,075 名</h4><p>共有 149 個校科志願，包含學術、機械、電機電子、商管、外語、設計、餐旅等群別。</p></article>
-            <article class="info-card"><span class="tag">實用技能學程</span><h4>112 名</h4><p>共有 21 個校科志願，包含美容造型、動力機械、電機電子、餐旅、商業與農業群。</p></article>
-          </div>
+          <p class="detail-lead">115 學年度官方名額表列出 149 個高級中等學校校科志願、共 1,075 名；另有實用技能學程 21 個校科志願、共 112 名。可直接從下方搜尋與篩選。</p>
+          ${taoyuanSchoolFinderTemplate("highSchool")}
           <div class="detail-grid two">
             <article class="info-card"><span class="tag">群別選擇</span><h4>最多選 3 個群別</h4><p>第 1 至第 3 志願必須填同一群別；從第 4 志願起，可填所選 3 個群別內的校科。</p></article>
             <article class="info-card"><span class="tag">志願數</span><h4>至少 15 個、至多 30 個</h4><p>志願太少可能影響安置機會；填寫時可和國中老師一起確認排序。</p></article>
           </div>
-          <aside class="official-action"><div><strong>查看完整校科與預估安置名額</strong><p>校名、科別與名額以官方「含缺額」簡章為準。</p></div><a class="button primary" href="${officialSources.taoyuanHighSchoolSeats}" target="_blank" rel="noreferrer">查看官方名額表</a></aside>
           ${sourceNote("名額、校科志願數與群別規則依官方含缺額簡章及正式簡章整理。", officialSources.taoyuanHighSchoolSeats, "115 學年度官方含缺額簡章")}
         `
       },
@@ -434,12 +484,12 @@ const guides = {
         label: "學校與名額",
         title: "開缺學校與安置方式",
         body: `
-          <p class="detail-lead">集中式特教班的開缺學校與名額由桃園市於年度公告日公布；安置時以能力評估結果與現場唱名分發為核心。</p>
+          <p class="detail-lead">115 學年度共有 7 所開缺學校、150 名。可依校名、科別或技能領域篩選；安置時仍以能力評估結果與現場唱名分發為核心。</p>
+          ${taoyuanSchoolFinderTemplate("service")}
           <div class="detail-grid two">
             <article class="info-card"><span class="tag">先看能力評估</span><h4>基本與職業能力</h4><p>所有報名學生都須參加能力評估；工作小組會依參與人數與結果訂定切截點安置標準。</p></article>
             <article class="info-card"><span class="tag">再參加分發</span><h4>現場唱名分發</h4><p>法定代理人、實際照顧者或符合規定的受委託人應到場；未到場且未完成委託者，不予安置。</p></article>
           </div>
-          <aside class="official-action"><div><strong>查看官方開缺學校與名額</strong><p>請以「含缺額」簡章及年度官方公告為準。</p></div><a class="button primary" href="${officialSources.taoyuanServiceSeats}" target="_blank" rel="noreferrer">查看官方名額表</a></aside>
           ${sourceNote("依集中式特教班簡章第 2-7 至 2-9 頁與官方含缺額簡章整理。", officialSources.taoyuanServiceSeats, "115 學年度官方含缺額簡章")}
         `
       },
@@ -545,7 +595,7 @@ function renderGuideRoute() {
     <div class="detail-body">${topic.body}</div>
     <div class="detail-footer-actions"><a class="button primary" href="#home">回到四個主題</a></div>
   `;
-  bindNewTaipeiSchoolFinder();
+  bindSchoolFinder();
   document.querySelector("#guideNavLabel").textContent = topic.label;
   setGuideView("info");
   document.title = `${topic.label}｜${guide.shortTitle}`;
