@@ -24,7 +24,10 @@ const officialSources = {
   kaohsiungHighSchool: "https://www.dam.kh.edu.tw/upload/68/101_6879/115%E6%99%AE%E9%80%9A%E7%8F%AD%E5%AF%A6%E7%94%A8%E6%8A%80%E8%83%BD%E7%B0%A1%E7%AB%A0.pdf",
   kaohsiungHighSchoolSeats: "https://www.mhjh.kh.edu.tw/upload/331/101_56590/45139125_11440430000_ATT1.pdf",
   kaohsiungService: "https://www.dam.kh.edu.tw/upload/68/101_6879/115%E9%9B%86%E4%B8%AD%E5%BC%8F%E7%89%B9%E6%95%99%E7%8F%AD.pdf",
-  kaohsiungSpecialSchool: "https://www.mhjh.kh.edu.tw/upload/331/101_56590/45082993_11440105900_ATT1.pdf"
+  kaohsiungSpecialSchool: "https://www.mhjh.kh.edu.tw/upload/331/101_56590/45082993_11440105900_ATT1.pdf",
+  tainanPortal: "https://serc.tn.edu.tw/115%E5%AD%B8%E5%B9%B4%E5%BA%A6%E8%BA%AB%E5%BF%83%E9%9A%9C%E7%A4%99%E5%AD%B8%E7%94%9F%E9%81%A9%E6%80%A7%E8%BC%94%E5%B0%8E%E5%AE%89%E7%BD%AE%E5%B7%A5%E4%BD%9C%E7%9B%B8%E9%97%9C%E8%A1%A8%E4%BB%B6/",
+  tainanGuide: "https://serc.tn.edu.tw/wp-content/uploads/2025/12/%E8%87%BA%E5%8D%97%E5%B8%82115%E5%AD%B8%E5%B9%B4%E5%BA%A6%E8%BA%AB%E5%BF%83%E9%9A%9C%E7%A4%99%E5%AD%B8%E7%94%9F%E9%81%A9%E6%80%A7%E8%BC%94%E5%B0%8E%E5%AE%89%E7%BD%AE%E5%B7%A5%E4%BD%9C%E8%AA%AA%E6%98%8E%E6%9C%83%E6%89%8B%E5%86%8A.pdf",
+  tainanVacancies: "https://www.tnmr.tn.edu.tw/wp-content/uploads/sites/119/2025/12/115%E9%81%A9%E6%80%A7%E5%AE%89%E7%BD%AE%E9%96%8B%E7%BC%BA%E5%90%8D%E9%A1%8D%E5%85%AC%E5%91%8A%E7%89%88.pdf"
 };
 
 function sourceNote(text, url, label = "115 學年度官方簡章") {
@@ -108,16 +111,21 @@ function taipeiServiceSchoolFinderTemplate() {
 
 function citySchoolFinderTemplate(city, type) {
   const isTaichung = city === "taichung";
+  const isTainan = city === "tainan";
   const isHighSchool = type === "highSchool";
   const isService = type === "service";
   const sourceKey = `${city}-${type}`;
   const labels = isHighSchool
     ? { title: "可選學校、校科與名額", description: "輸入校名或科別，再依學校類型或群別縮小範圍。" }
     : { title: "可選學校與安置名額", description: "輸入校名、科別或技能領域，查看官方列出的安置資料。" };
-  const urls = isTaichung
+  const urls = isTainan
+    ? { highSchool: officialSources.tainanVacancies, service: officialSources.tainanVacancies, specialSchool: officialSources.tainanVacancies }
+    : isTaichung
     ? { highSchool: officialSources.taichungHighSchool, service: officialSources.taichungService, specialSchool: officialSources.taichungSpecialSchool }
     : { highSchool: officialSources.kaohsiungHighSchoolSeats, service: officialSources.kaohsiungService, specialSchool: officialSources.kaohsiungSpecialSchool };
-  const note = isTaichung
+  const note = isTainan
+    ? "臺南市參與國教署聯合安置的臺南區作業；名額不等於保證安置，實際結果以國教署與臺南市最新公告為準。"
+    : isTaichung
     ? "名額不等於保證安置；實際結果仍以鑑輔會工作小組與臺中市最新公告為準。"
     : "名額不等於保證安置；實際結果仍以高雄市身障生安置審議小組與最新公告為準。";
   return schoolFinderTemplate({
@@ -126,7 +134,7 @@ function citySchoolFinderTemplate(city, type) {
     title: labels.title,
     description: labels.description,
     officialUrl: urls[type],
-    officialLabel: isHighSchool && !isTaichung ? "查看官方名額表" : "查看官方簡章",
+    officialLabel: isTainan || (isHighSchool && !isTaichung) ? "查看官方開缺名單" : "查看官方簡章",
     note,
     placeholder: "例如：臺中高工、餐飲、綜合職能科"
   });
@@ -151,6 +159,7 @@ function getSchoolFinderRows(finder) {
   if (source === "taoyuan" && typeof taoyuanSchoolData !== "undefined") return taoyuanSchoolData[type] || [];
   if (source === "taichung" && typeof taichungSchoolData !== "undefined") return taichungSchoolData[type.replace("taichung-", "")] || [];
   if (source === "kaohsiung" && typeof kaohsiungSchoolData !== "undefined") return kaohsiungSchoolData[type.replace("kaohsiung-", "")] || [];
+  if (source === "tainan" && typeof tainanSchoolData !== "undefined") return tainanSchoolData[type.replace("tainan-", "")] || [];
   if (source === "taipeiService") return taipeiServiceSchoolData;
   return [];
 }
@@ -697,12 +706,26 @@ const kaohsiungTimeline = [
   { date: ["2026/7/31"], title: "公告餘額安置結果", text: "後續餘額安置依官方公告辦理。" }
 ];
 
+const tainanTimeline = [
+  { date: ["2026/1/2", "2026/1/16"], title: "志願試探與模擬選填", text: "由原國中依國教署系統與公告期程協助辦理。" },
+  { date: ["2026/2/23", "2026/3/3"], title: "網路報名", text: "學生向原就讀國中報名，由國中完成網路報名。" },
+  { date: ["2026/3/4", "2026/3/9"], title: "資料審查與補件", text: "臺南區依公告安排收件、審查與補件。" },
+  { date: ["2026/4/11"], title: "能力評估", text: "僅集中式特教班適用，地點為國立臺南特殊教育學校。" },
+  { date: ["2026/6/1"], title: "公告安置結果", text: "結果依國教署適性輔導安置查詢網站公告。" },
+  { date: ["2026/6/10", "2026/6/15"], title: "特教學校、集中式特教班報到", text: "依錄取學校規定完成報到。" },
+  { date: ["2026/7/8", "2026/7/9 中午 12:00 前"], title: "高級中等學校報到", text: "依錄取學校規定時間完成報到。" },
+  { date: ["2026/7/31"], title: "公告餘額安置結果", text: "餘額安置後續報到期限依官方公告辦理。" }
+];
+
 guides["taichung-high-school"] = cityGuide({ city: "臺中市", cityKey: "taichung", type: "highSchool", typeTitle: "高級中等學校", sources: { highSchool: officialSources.taichungHighSchool }, timeline: taichungTimeline, schoolLead: "115 學年度官方開缺資料共有 224 筆校科資料與 938 個名額，包含特殊教育學校的視覺、聽覺障礙類選項。可直接搜尋與篩選。" });
 guides["taichung-service"] = cityGuide({ city: "臺中市", cityKey: "taichung", type: "service", typeTitle: "集中式特教班", sources: { service: officialSources.taichungService }, timeline: taichungTimeline, schoolLead: "115 學年度共有 8 所開缺學校、185 個安置名額；集中式特教班依能力評估結果，採現場依序唱名分發。" });
 guides["taichung-special-school"] = cityGuide({ city: "臺中市", cityKey: "taichung", type: "specialSchool", typeTitle: "特殊教育學校", sources: { specialSchool: officialSources.taichungSpecialSchool }, timeline: taichungTimeline, schoolLead: "115 學年度特教學校資料包含視覺、聽覺與智能障礙類選項。智能障礙類以安置至學校為主，後續由安置學校完成分科。" });
 guides["kaohsiung-high-school"] = cityGuide({ city: "高雄市", cityKey: "kaohsiung", type: "highSchool", typeTitle: "普通班、實用技能學程", sources: { highSchool: officialSources.kaohsiungHighSchoolSeats }, timeline: kaohsiungTimeline, schoolLead: "115 學年度官方名額表共有 195 筆校科資料、52 所學校與 882 個安置名額，包含普通班與實用技能學程。可直接依行政區、學校類型或群別篩選。" });
 guides["kaohsiung-service"] = cityGuide({ city: "高雄市", cityKey: "kaohsiung", type: "service", typeTitle: "集中式特教班", sources: { service: officialSources.kaohsiungService }, timeline: kaohsiungTimeline, schoolLead: "115 學年度共有 9 所開缺學校、10 筆校科資料、140 個安置名額；未參加能力評估者不予安置。" });
 guides["kaohsiung-special-school"] = cityGuide({ city: "高雄市", cityKey: "kaohsiung", type: "specialSchool", typeTitle: "特殊教育學校", sources: { specialSchool: officialSources.kaohsiungSpecialSchool }, timeline: kaohsiungTimeline, schoolLead: "115 學年度共有 4 所特殊教育學校、9 筆校科資料、129 個安置名額。部分學校入學後再依學生需求協助選擇科別。" });
+guides["tainan-high-school"] = cityGuide({ city: "臺南區", cityKey: "tainan", type: "highSchool", typeTitle: "高級中等學校", sources: { highSchool: officialSources.tainanGuide }, timeline: tainanTimeline, schoolLead: "臺南市參與國教署聯合安置的臺南區作業。115 學年度官方開缺資料有 171 筆校科資料、46 所學校與 586 個名額，包含高級中等學校及實用技能學程，可直接搜尋與篩選。" });
+guides["tainan-service"] = cityGuide({ city: "臺南區", cityKey: "tainan", type: "service", typeTitle: "集中式特教班", sources: { service: officialSources.tainanGuide }, timeline: tainanTimeline, schoolLead: "115 學年度共有 6 所開缺學校、6 筆校科資料與 98 個安置名額。學生須參加能力評估，再依作業安排安置。" });
+guides["tainan-special-school"] = cityGuide({ city: "臺南區", cityKey: "tainan", type: "specialSchool", typeTitle: "國立特殊教育學校", sources: { specialSchool: officialSources.tainanGuide }, timeline: tainanTimeline, schoolLead: "115 學年度臺南區共有 2 所國立特殊教育學校、3 筆校科資料與 72 個安置名額。可依障礙類別、支持需求與簡章資格確認適用性。" });
 
 const guide = guides[document.body.dataset.guide];
 const detail = document.querySelector("#guideDetail");
