@@ -33,12 +33,12 @@ function newTaipeiSchoolFinderTemplate(type) {
   const officialLabel = isGeneral ? "查看官方一般類科名額" : "查看官方服務群科名額";
   const description = isGeneral
     ? "輸入校名或科別，再依分區、學校類型或群別縮小範圍。"
-    : "輸入校名，再依學校類型縮小範圍。服務群科名額請以官方公告為準。";
+    : "輸入校名，再依學校類型縮小範圍。名額分為第一、第二階段，請依能力評估結果與簡章規定選填。";
 
   return `
     <section class="school-finder guide-school-finder" data-new-taipei-school-finder="${type}" aria-labelledby="newTaipeiFinderTitle">
       <div class="finder-heading">
-        <div><h3 id="newTaipeiFinderTitle">可選學校與校科</h3><p>${description}</p></div>
+        <div><h3 id="newTaipeiFinderTitle">${isGeneral ? "可選學校與校科" : "可選學校與安置名額"}</h3><p>${description}</p></div>
         <a class="text-link" href="${officialUrl}" target="_blank" rel="noreferrer">${officialLabel}</a>
       </div>
       <div class="finder-controls" aria-label="校科篩選條件">
@@ -98,12 +98,13 @@ function bindNewTaipeiSchoolFinder() {
     const seatCount = filtered.reduce((total, row) => total + (Number.isFinite(row.seats) ? row.seats : 0), 0);
     const hasSeats = filtered.some((row) => Number.isFinite(row.seats));
 
+    const recordLabel = finder.dataset.newTaipeiSchoolFinder === "service" ? "筆安置資料" : "筆校科資料";
     summary.textContent = hasSeats
-      ? `115 學年度官方資料｜找到 ${schoolCount} 所學校、${filtered.length} 筆校科資料，合計 ${seatCount} 名`
+      ? `115 學年度官方資料｜找到 ${schoolCount} 所學校、${filtered.length} ${recordLabel}，合計 ${seatCount} 名`
       : `115 學年度官方資料｜找到 ${schoolCount} 所學校`;
     results.innerHTML = visibleRows.map((row) => {
       const tags = [row.district, row.kind, row.group].filter(Boolean).map((tag) => `<span>${tag}</span>`).join("");
-      const seats = Number.isFinite(row.seats) ? `實際開缺 ${row.seats} 名` : "名額請以官方公告為準";
+      const seats = Number.isFinite(row.seats) ? `總安置 ${row.seats} 名` : "名額請以官方公告為準";
       return `<article class="school-result guide-school-result"><div class="result-main"><div class="result-tags">${tags}</div><h3>${row.school}</h3><p>${row.program}</p></div><strong class="selected-seat">${seats}</strong></article>`;
     }).join("");
     empty.hidden = filtered.length > 0;
