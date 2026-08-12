@@ -22,6 +22,7 @@ const officialSources = {
   taichungSpecialSchool: "https://www.tc.edu.tw/cms-file/6a17ad6efba5194ece0cc994.pdf",
   kaohsiungPortal: "http://adapt.spec.kh.edu.tw/",
   kaohsiungHighSchool: "https://www.dam.kh.edu.tw/upload/68/101_6879/115%E6%99%AE%E9%80%9A%E7%8F%AD%E5%AF%A6%E7%94%A8%E6%8A%80%E8%83%BD%E7%B0%A1%E7%AB%A0.pdf",
+  kaohsiungHighSchoolSeats: "https://www.mhjh.kh.edu.tw/upload/331/101_56590/45139125_11440430000_ATT1.pdf",
   kaohsiungService: "https://www.dam.kh.edu.tw/upload/68/101_6879/115%E9%9B%86%E4%B8%AD%E5%BC%8F%E7%89%B9%E6%95%99%E7%8F%AD.pdf",
   kaohsiungSpecialSchool: "https://www.mhjh.kh.edu.tw/upload/331/101_56590/45082993_11440105900_ATT1.pdf"
 };
@@ -115,19 +116,17 @@ function citySchoolFinderTemplate(city, type) {
     : { title: "可選學校與安置名額", description: "輸入校名、科別或技能領域，查看官方列出的安置資料。" };
   const urls = isTaichung
     ? { highSchool: officialSources.taichungHighSchool, service: officialSources.taichungService, specialSchool: officialSources.taichungSpecialSchool }
-    : { highSchool: officialSources.kaohsiungHighSchool, service: officialSources.kaohsiungService, specialSchool: officialSources.kaohsiungSpecialSchool };
+    : { highSchool: officialSources.kaohsiungHighSchoolSeats, service: officialSources.kaohsiungService, specialSchool: officialSources.kaohsiungSpecialSchool };
   const note = isTaichung
     ? "名額不等於保證安置；實際結果仍以鑑輔會工作小組與臺中市最新公告為準。"
-    : isHighSchool
-      ? "普通班、實用技能學程的各校開缺名額以高雄市安置網站公告為準；此處先列出簡章中的安置學校。"
-      : "名額不等於保證安置；實際結果仍以高雄市身障生安置審議小組與最新公告為準。";
+    : "名額不等於保證安置；實際結果仍以高雄市身障生安置審議小組與最新公告為準。";
   return schoolFinderTemplate({
     source: city,
     type: sourceKey,
     title: labels.title,
     description: labels.description,
     officialUrl: urls[type],
-    officialLabel: isHighSchool && !isTaichung ? "查看官方簡章與名額公告" : "查看官方簡章",
+    officialLabel: isHighSchool && !isTaichung ? "查看官方名額表" : "查看官方簡章",
     note,
     placeholder: "例如：臺中高工、餐飲、綜合職能科"
   });
@@ -701,7 +700,7 @@ const kaohsiungTimeline = [
 guides["taichung-high-school"] = cityGuide({ city: "臺中市", cityKey: "taichung", type: "highSchool", typeTitle: "高級中等學校", sources: { highSchool: officialSources.taichungHighSchool }, timeline: taichungTimeline, schoolLead: "115 學年度官方開缺資料共有 224 筆校科資料與 938 個名額，包含特殊教育學校的視覺、聽覺障礙類選項。可直接搜尋與篩選。" });
 guides["taichung-service"] = cityGuide({ city: "臺中市", cityKey: "taichung", type: "service", typeTitle: "集中式特教班", sources: { service: officialSources.taichungService }, timeline: taichungTimeline, schoolLead: "115 學年度共有 8 所開缺學校、185 個安置名額；集中式特教班依能力評估結果，採現場依序唱名分發。" });
 guides["taichung-special-school"] = cityGuide({ city: "臺中市", cityKey: "taichung", type: "specialSchool", typeTitle: "特殊教育學校", sources: { specialSchool: officialSources.taichungSpecialSchool }, timeline: taichungTimeline, schoolLead: "115 學年度特教學校資料包含視覺、聽覺與智能障礙類選項。智能障礙類以安置至學校為主，後續由安置學校完成分科。" });
-guides["kaohsiung-high-school"] = cityGuide({ city: "高雄市", cityKey: "kaohsiung", type: "highSchool", typeTitle: "普通班、實用技能學程", sources: { highSchool: officialSources.kaohsiungHighSchool }, timeline: kaohsiungTimeline, schoolLead: "115 學年度簡章列出 50 所安置學校。各校普通班、實用技能學程的開缺名額由高雄市官方安置網站另行公告，請點官方連結核對最新資料。" });
+guides["kaohsiung-high-school"] = cityGuide({ city: "高雄市", cityKey: "kaohsiung", type: "highSchool", typeTitle: "普通班、實用技能學程", sources: { highSchool: officialSources.kaohsiungHighSchoolSeats }, timeline: kaohsiungTimeline, schoolLead: "115 學年度官方名額表共有 195 筆校科資料、52 所學校與 882 個安置名額，包含普通班與實用技能學程。可直接依行政區、學校類型或群別篩選。" });
 guides["kaohsiung-service"] = cityGuide({ city: "高雄市", cityKey: "kaohsiung", type: "service", typeTitle: "集中式特教班", sources: { service: officialSources.kaohsiungService }, timeline: kaohsiungTimeline, schoolLead: "115 學年度共有 9 所開缺學校、10 筆校科資料、140 個安置名額；未參加能力評估者不予安置。" });
 guides["kaohsiung-special-school"] = cityGuide({ city: "高雄市", cityKey: "kaohsiung", type: "specialSchool", typeTitle: "特殊教育學校", sources: { specialSchool: officialSources.kaohsiungSpecialSchool }, timeline: kaohsiungTimeline, schoolLead: "115 學年度共有 4 所特殊教育學校、9 筆校科資料、129 個安置名額。部分學校入學後再依學生需求協助選擇科別。" });
 
