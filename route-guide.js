@@ -9,7 +9,13 @@ const officialSources = {
   taoyuanHighSchoolGuide:
     "https://tyshse.special.tyc.edu.tw/%E7%B0%A1%E7%AB%A0/115/115%E5%AD%B8%E5%B9%B4%E5%BA%A6%E6%A1%83%E5%9C%92%E5%B8%82%E8%BA%AB%E5%BF%83%E9%9A%9C%E7%A4%99%E5%AD%B8%E7%94%9F%E9%81%A9%E6%80%A7%E8%BC%94%E5%B0%8E%E5%AE%89%E7%BD%AE%E9%AB%98%E7%B4%9A%E4%B8%AD%E7%AD%89%E5%AD%B8%E6%A0%A1%E7%B0%A1%E7%AB%A0.pdf",
   taoyuanHighSchoolSeats:
-    "https://tyshse.special.tyc.edu.tw/%E7%B0%A1%E7%AB%A0/115/115%E5%AD%B8%E5%B9%B4%E5%BA%A6%E6%A1%83%E5%9C%92%E5%B8%82%E8%BA%AB%E5%BF%83%E9%9A%9C%E7%A4%99%E5%AD%B8%E7%94%9F%E9%81%A9%E6%80%A7%E8%BC%94%E5%B0%8E%E5%AE%89%E7%BD%AE%E9%AB%98%E7%B4%9A%E4%B8%AD%E7%AD%89%E5%AD%B8%E6%A0%A1%E7%B0%A1%E7%AB%A0%28%E5%90%AB%E7%BC%BA%E9%A1%8D%29.pdf"
+    "https://tyshse.special.tyc.edu.tw/%E7%B0%A1%E7%AB%A0/115/115%E5%AD%B8%E5%B9%B4%E5%BA%A6%E6%A1%83%E5%9C%92%E5%B8%82%E8%BA%AB%E5%BF%83%E9%9A%9C%E7%A4%99%E5%AD%B8%E7%94%9F%E9%81%A9%E6%80%A7%E8%BC%94%E5%B0%8E%E5%AE%89%E7%BD%AE%E9%AB%98%E7%B4%9A%E4%B8%AD%E7%AD%89%E5%AD%B8%E6%A0%A1%E7%B0%A1%E7%AB%A0%28%E5%90%AB%E7%BC%BA%E9%A1%8D%29.pdf",
+  taoyuanServiceGuide:
+    "https://tyshse.special.tyc.edu.tw/%E7%B0%A1%E7%AB%A0/115/115%E5%AD%B8%E5%B9%B4%E5%BA%A6%E6%A1%83%E5%9C%92%E5%B8%82%E8%BA%AB%E5%BF%83%E9%9A%9C%E7%A4%99%E5%AD%B8%E7%94%9F%E9%81%A9%E6%80%A7%E8%BC%94%E5%B0%8E%E5%AE%89%E7%BD%AE%E9%AB%98%E7%B4%9A%E4%B8%AD%E7%AD%89%E5%AD%B8%E6%A0%A1%E9%9B%86%E4%B8%AD%E5%BC%8F%E7%89%B9%E6%95%99%E7%8F%AD%E7%B0%A1%E7%AB%A0.pdf",
+  taoyuanServiceSeats:
+    "https://tyshse.special.tyc.edu.tw/%E7%B0%A1%E7%AB%A0/115/115%E5%AD%B8%E5%B9%B4%E5%BA%A6%E6%A1%83%E5%9C%92%E5%B8%82%E8%BA%AB%E5%BF%83%E9%9A%9C%E7%A4%99%E5%AD%B8%E7%94%9F%E9%81%A9%E6%80%A7%E8%BC%94%E5%B0%8E%E5%AE%89%E7%BD%AE%E9%AB%98%E7%B4%9A%E4%B8%AD%E7%AD%89%E5%AD%B8%E6%A0%A1%E9%9B%86%E4%B8%AD%E5%BC%8F%E7%89%B9%E6%95%99%E7%8F%AD%E7%B0%A1%E7%AB%A0%28%E5%90%AB%E7%BC%BA%E9%A1%8D%29.pdf",
+  taoyuanSpecialGuide:
+    "https://tyshse.special.tyc.edu.tw/%E7%B0%A1%E7%AB%A0/115/115%E5%AD%B8%E5%B9%B4%E5%BA%A6%E6%A1%83%E5%9C%92%E5%B8%82%E8%BA%AB%E5%BF%83%E9%9A%9C%E7%A4%99%E5%AD%B8%E7%94%9F%E9%81%A9%E6%80%A7%E8%BC%94%E5%B0%8E%E5%AE%89%E7%BD%AE%E7%89%B9%E6%AE%8A%E6%95%99%E8%82%B2%E5%AD%B8%E6%A0%A1%E7%B0%A1%E7%AB%A0.pdf"
 };
 
 function sourceNote(text, url, label = "115 學年度官方簡章") {
@@ -387,6 +393,127 @@ const guides = {
             <details><summary>錯過第一輪還有機會嗎？</summary><p>未參加本安置、未透過其他入學管道錄取且符合資格者，可留意正式安置後的餘額安置公告。</p>${faqBasis("正式簡章 PDF 第 9 至 10 頁，「餘額安置」", officialSources.taoyuanHighSchoolGuide)}</details>
           </div>
           ${sourceNote("各題依正式簡章的報名、志願、安置、報到與餘額安置規定整理。", officialSources.taoyuanHighSchoolGuide)}
+        `
+      }
+    }
+  },
+  "taoyuan-service": {
+    title: "桃園市高級中等學校集中式特教班",
+    shortTitle: "桃園市集中式特教班",
+    topics: {
+      eligibility: {
+        label: "申請資格",
+        title: "先確認是否適用集中式特教班",
+        body: `
+          <p class="detail-lead">這一類主要適用於持有智能障礙，或其他障礙伴隨智能障礙鑑定證明，且為輕、中度智能障礙的學生。</p>
+          <div class="detail-grid two">
+            <article class="info-card"><span class="tag">共同條件</span><h4>學歷、年齡與通報</h4><ul><li>應屆畢業生可申請；非應屆者須未曾參加適性安置並具國中畢（修）業或同等學力。</li><li>非應屆者原則上須在 21 足歲以下；應屆畢業生不受此限。</li><li>應屆生須於 2025/12/31 前完成特教通報網確認個案登錄。</li></ul></article>
+            <article class="info-card"><span class="tag">鑑定證明</span><h4>輕、中度智能障礙</h4><ul><li>須持有鑑輔會核發的智能障礙鑑定證明，或其他障礙伴隨智能障礙的鑑定證明。</li><li>簡章適用輕度或中度智能障礙學生。</li></ul></article>
+            <article class="info-card"><span class="tag">報名方式</span><h4>由原國中協助</h4><ul><li>由原就讀國中完成網路報名與紙本送件。</li><li>跨縣市報名者亦由原國中辦理，並依期限郵寄資料。</li></ul></article>
+            <article class="info-card"><span class="tag">只能選一類</span><h4>不可重複報名</h4><p>不得同時報名桃園市特殊教育學校或高級中等學校簡章，也不能重複參加其他縣市或國教署的適性安置。</p></article>
+          </div>
+          ${sourceNote("依集中式特教班簡章第 2-5 至 2-6 頁整理。", officialSources.taoyuanServiceGuide)}
+        `
+      },
+      timeline: {
+        label: "重要時程",
+        title: "重要時程",
+        body: `
+          <div class="timeline">
+            <article class="timeline-item"><time><span class="timeline-date">2026/1/26</span><span class="timeline-date">2026/2/26</span></time><div><h3>完成網路報名</h3><p>學生向原國中報名，由國中完成平台作業。</p></div></article>
+            <article class="timeline-item"><time><span class="timeline-date">2026/3/2</span><span class="timeline-date">2026/3/6</span></time><div><h3>桃園市國中送件</h3><p>國中彙整並送達紙本報名表件。</p></div></article>
+            <article class="timeline-item"><time><span class="timeline-date">2026/4/11</span></time><div><h3>能力評估</h3><p>包含基本學習能力及職業能力評估。</p></div></article>
+            <article class="timeline-item"><time><span class="timeline-date">2026/4/20</span></time><div><h3>查詢評估結果</h3><p>結果通知單寄至國中，並提供網路查詢。</p></div></article>
+            <article class="timeline-item"><time><span class="timeline-date">2026/5/4</span><span class="timeline-date">2026/5/8</span></time><div><h3>唱名分發</h3><p>由桃園特教學校通知日期與地點；無法到場須依規定委託。</p></div></article>
+            <article class="timeline-item"><time><span class="timeline-date">2026/6/10</span><span class="timeline-date">2026/6/15</span></time><div><h3>至安置學校報到</h3><p>依安置學校指定時間完成報到。</p></div></article>
+          </div>
+          ${sourceNote("依集中式特教班簡章第 2-3 至 2-4 頁辦理日程表整理。", officialSources.taoyuanServiceGuide)}
+        `
+      },
+      schools: {
+        label: "學校與名額",
+        title: "開缺學校與安置方式",
+        body: `
+          <p class="detail-lead">集中式特教班的開缺學校與名額由桃園市於年度公告日公布；安置時以能力評估結果與現場唱名分發為核心。</p>
+          <div class="detail-grid two">
+            <article class="info-card"><span class="tag">先看能力評估</span><h4>基本與職業能力</h4><p>所有報名學生都須參加能力評估；工作小組會依參與人數與結果訂定切截點安置標準。</p></article>
+            <article class="info-card"><span class="tag">再參加分發</span><h4>現場唱名分發</h4><p>法定代理人、實際照顧者或符合規定的受委託人應到場；未到場且未完成委託者，不予安置。</p></article>
+          </div>
+          <aside class="official-action"><div><strong>查看官方開缺學校與名額</strong><p>請以「含缺額」簡章及年度官方公告為準。</p></div><a class="button primary" href="${officialSources.taoyuanServiceSeats}" target="_blank" rel="noreferrer">查看官方名額表</a></aside>
+          ${sourceNote("依集中式特教班簡章第 2-7 至 2-9 頁與官方含缺額簡章整理。", officialSources.taoyuanServiceSeats, "115 學年度官方含缺額簡章")}
+        `
+      },
+      faq: {
+        label: "簡章重點問答",
+        title: "簡章重點問答",
+        body: `
+          <div class="faq-list">
+            <details><summary>需要參加能力評估嗎？</summary><p>需要。集中式特教班所有報名學生都要參加基本學習能力及職業能力評估。</p>${faqBasis("集中式特教班簡章第 2-7 頁，「能力評估」", officialSources.taoyuanServiceGuide)}</details>
+            <details><summary>能力評估結果可以複查嗎？</summary><p>可以。在 2026/4/27 中午 12 時前，檢附原結果通知單正本，以傳真向桃園特教學校申請；複查以一次為限。</p>${faqBasis("集中式特教班簡章第 2-7 頁，「結果複查」", officialSources.taoyuanServiceGuide)}</details>
+            <details><summary>唱名分發一定要到嗎？</summary><p>原則上要。若法定代理人或實際照顧者無法到場，須依簡章規定委託原國中的相關人員；未到場且未完成委託者不予安置。</p>${faqBasis("集中式特教班簡章第 2-8 頁，「安置作業」", officialSources.taoyuanServiceGuide)}</details>
+            <details><summary>可以同時報名其他安置類型嗎？</summary><p>不可以。三類簡章只能選一種，也不得重複參加其他直轄市或國教署適性安置。</p>${faqBasis("集中式特教班簡章第 2-8 頁，「安置作業」", officialSources.taoyuanServiceGuide)}</details>
+          </div>
+          ${sourceNote("各題依集中式特教班簡章的能力評估、安置與報到規定整理。", officialSources.taoyuanServiceGuide)}
+        `
+      }
+    }
+  },
+  "taoyuan-special-school": {
+    title: "桃園市特殊教育學校適性輔導安置",
+    shortTitle: "桃園市特殊教育學校",
+    topics: {
+      eligibility: {
+        label: "申請資格",
+        title: "先確認是否適用特殊教育學校",
+        body: `
+          <p class="detail-lead">這一類以中重度需求學生為主，115 學年度安置學校為桃園特教學校。</p>
+          <div class="detail-grid two">
+            <article class="info-card"><span class="tag">共同條件</span><h4>學歷、年齡與通報</h4><ul><li>應屆畢業生可申請；非應屆者須未曾參加適性安置並具國中畢（修）業或同等學力。</li><li>非應屆者原則上須在 21 足歲以下；應屆畢業生不受此限。</li><li>應屆生須於 2025/12/31 前完成特教通報網確認個案登錄。</li></ul></article>
+            <article class="info-card"><span class="tag">適用對象</span><h4>中重度需求為主</h4><ul><li>智能障礙中度、重度或極重度。</li><li>自閉症中度且伴隨智能障礙，或重度、極重度。</li><li>腦性麻痺中度以上且伴隨智能障礙，或其他障礙含中重度智能障礙。</li></ul></article>
+            <article class="info-card"><span class="tag">報名方式</span><h4>由原國中協助</h4><p>由原就讀國中完成網路報名與紙本送件；跨縣市報名者亦由原國中依期限郵寄資料。</p></article>
+            <article class="info-card"><span class="tag">在家教育</span><h4>另有前提</h4><p>申請在家教育者，國中階段須已安置在家教育巡迴輔導班，並於報名期間繳交相關表件。</p></article>
+          </div>
+          ${sourceNote("依特殊教育學校簡章第 1-5 至 1-7 頁整理。", officialSources.taoyuanSpecialGuide)}
+        `
+      },
+      timeline: {
+        label: "重要時程",
+        title: "重要時程",
+        body: `
+          <div class="timeline">
+            <article class="timeline-item"><time><span class="timeline-date">2026/1/26</span><span class="timeline-date">2026/2/26</span></time><div><h3>完成網路報名</h3><p>學生向原國中報名，由國中完成平台作業。</p></div></article>
+            <article class="timeline-item"><time><span class="timeline-date">2026/3/2</span><span class="timeline-date">2026/3/6</span></time><div><h3>桃園市國中送件</h3><p>國中彙整並送達紙本報名表件。</p></div></article>
+            <article class="timeline-item"><time><span class="timeline-date">2026/6/1</span></time><div><h3>公告安置結果</h3><p>結果公告於官方安置網站，通知單由國中轉發。</p></div></article>
+            <article class="timeline-item"><time><span class="timeline-date">2026/6/10</span><span class="timeline-date">2026/6/15</span></time><div><h3>到桃園特教學校報到</h3><p>攜帶通知單、學歷證件及規定資料辦理。</p></div></article>
+            <article class="timeline-item"><time><span class="timeline-date">2026/7/31</span></time><div><h3>餘額安置結果公告</h3><p>餘額安置結果公告後，須於 8/7 前完成報到。</p></div></article>
+          </div>
+          ${sourceNote("依特殊教育學校簡章第 1-3 至 1-4 頁辦理日程表整理。", officialSources.taoyuanSpecialGuide)}
+        `
+      },
+      schools: {
+        label: "學校與名額",
+        title: "以桃園特教學校為限",
+        body: `
+          <p class="detail-lead">115 學年度循此簡章報名的學生，安置學校為桃園市立桃園特殊教育學校；錄取報到後，再由學校依期程完成分科安置。</p>
+          <div class="detail-grid two">
+            <article class="info-card"><span class="tag">安置方式</span><h4>書面審查綜合研判</h4><p>鑑定安置工作小組會依轉銜輔導及相關會議紀錄、學生需求與學校資源進行書面審查。</p></article>
+            <article class="info-card"><span class="tag">分科安排</span><h4>報到後填選科志願</h4><p>完成報到當日填寫選科志願，由桃園特教學校在公告期程內完成分科安置。</p></article>
+          </div>
+          <aside class="official-action"><div><strong>查看官方開缺名額</strong><p>桃園特教學校實際安置名額以年度公告為準。</p></div><a class="button primary" href="${officialSources.taoyuanSpecialGuide}" target="_blank" rel="noreferrer">查看官方簡章</a></aside>
+          ${sourceNote("依特殊教育學校簡章第 1-7 至 1-8 頁整理。", officialSources.taoyuanSpecialGuide)}
+        `
+      },
+      faq: {
+        label: "簡章重點問答",
+        title: "簡章重點問答",
+        body: `
+          <div class="faq-list">
+            <details><summary>會安置到哪些學校？</summary><p>115 學年度此簡章安置以桃園特教學校為限。</p>${faqBasis("特殊教育學校簡章第 1-7 頁，「安置作業」", officialSources.taoyuanSpecialGuide)}</details>
+            <details><summary>需要能力評估嗎？</summary><p>此簡章的安置作業是書面審查與綜合研判，不是集中式特教班的能力評估與唱名分發流程。</p>${faqBasis("特殊教育學校簡章第 1-7 頁，「安置作業」", officialSources.taoyuanSpecialGuide)}</details>
+            <details><summary>報到後可以選科嗎？</summary><p>可以。報到入學當日填寫選科志願，再由桃園特教學校完成分科安置。</p>${faqBasis("特殊教育學校簡章第 1-8 頁，「報到」", officialSources.taoyuanSpecialGuide)}</details>
+            <details><summary>可以同時報名其他兩類嗎？</summary><p>不可以。特殊教育學校、集中式特教班與高級中等學校只能選擇一種，也不得重複參加其他縣市或國教署適性安置。</p>${faqBasis("特殊教育學校簡章第 1-7 頁，「安置作業」", officialSources.taoyuanSpecialGuide)}</details>
+          </div>
+          ${sourceNote("各題依特殊教育學校簡章的資格、安置與報到規定整理。", officialSources.taoyuanSpecialGuide)}
         `
       }
     }
