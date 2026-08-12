@@ -15,7 +15,15 @@ const officialSources = {
   taoyuanServiceSeats:
     "https://tyshse.special.tyc.edu.tw/%E7%B0%A1%E7%AB%A0/115/115%E5%AD%B8%E5%B9%B4%E5%BA%A6%E6%A1%83%E5%9C%92%E5%B8%82%E8%BA%AB%E5%BF%83%E9%9A%9C%E7%A4%99%E5%AD%B8%E7%94%9F%E9%81%A9%E6%80%A7%E8%BC%94%E5%B0%8E%E5%AE%89%E7%BD%AE%E9%AB%98%E7%B4%9A%E4%B8%AD%E7%AD%89%E5%AD%B8%E6%A0%A1%E9%9B%86%E4%B8%AD%E5%BC%8F%E7%89%B9%E6%95%99%E7%8F%AD%E7%B0%A1%E7%AB%A0%28%E5%90%AB%E7%BC%BA%E9%A1%8D%29.pdf",
   taoyuanSpecialGuide:
-    "https://tyshse.special.tyc.edu.tw/%E7%B0%A1%E7%AB%A0/115/115%E5%AD%B8%E5%B9%B4%E5%BA%A6%E6%A1%83%E5%9C%92%E5%B8%82%E8%BA%AB%E5%BF%83%E9%9A%9C%E7%A4%99%E5%AD%B8%E7%94%9F%E9%81%A9%E6%80%A7%E8%BC%94%E5%B0%8E%E5%AE%89%E7%BD%AE%E7%89%B9%E6%AE%8A%E6%95%99%E8%82%B2%E5%AD%B8%E6%A0%A1%E7%B0%A1%E7%AB%A0.pdf"
+    "https://tyshse.special.tyc.edu.tw/%E7%B0%A1%E7%AB%A0/115/115%E5%AD%B8%E5%B9%B4%E5%BA%A6%E6%A1%83%E5%9C%92%E5%B8%82%E8%BA%AB%E5%BF%83%E9%9A%9C%E7%A4%99%E5%AD%B8%E7%94%9F%E9%81%A9%E6%80%A7%E8%BC%94%E5%B0%8E%E5%AE%89%E7%BD%AE%E7%89%B9%E6%AE%8A%E6%95%99%E8%82%B2%E5%AD%B8%E6%A0%A1%E7%B0%A1%E7%AB%A0.pdf",
+  taichungPortal: "https://www.tc.edu.tw/page/e1fe6e53-ebe1-4c8e-8218-9dc4414dc3f5",
+  taichungHighSchool: "https://www.tc.edu.tw/cms-file/6a17ad6efba5194ece0cc98f.pdf",
+  taichungService: "https://www.tc.edu.tw/cms-file/6a17ad6efba5194ece0cc997.pdf",
+  taichungSpecialSchool: "https://www.tc.edu.tw/cms-file/6a17ad6efba5194ece0cc994.pdf",
+  kaohsiungPortal: "http://adapt.spec.kh.edu.tw/",
+  kaohsiungHighSchool: "https://www.dam.kh.edu.tw/upload/68/101_6879/115%E6%99%AE%E9%80%9A%E7%8F%AD%E5%AF%A6%E7%94%A8%E6%8A%80%E8%83%BD%E7%B0%A1%E7%AB%A0.pdf",
+  kaohsiungService: "https://www.dam.kh.edu.tw/upload/68/101_6879/115%E9%9B%86%E4%B8%AD%E5%BC%8F%E7%89%B9%E6%95%99%E7%8F%AD.pdf",
+  kaohsiungSpecialSchool: "https://www.mhjh.kh.edu.tw/upload/331/101_56590/45082993_11440105900_ATT1.pdf"
 };
 
 function sourceNote(text, url, label = "115 學年度官方簡章") {
@@ -97,6 +105,34 @@ function taipeiServiceSchoolFinderTemplate() {
   });
 }
 
+function citySchoolFinderTemplate(city, type) {
+  const isTaichung = city === "taichung";
+  const isHighSchool = type === "highSchool";
+  const isService = type === "service";
+  const sourceKey = `${city}-${type}`;
+  const labels = isHighSchool
+    ? { title: "可選學校、校科與名額", description: "輸入校名或科別，再依學校類型或群別縮小範圍。" }
+    : { title: "可選學校與安置名額", description: "輸入校名、科別或技能領域，查看官方列出的安置資料。" };
+  const urls = isTaichung
+    ? { highSchool: officialSources.taichungHighSchool, service: officialSources.taichungService, specialSchool: officialSources.taichungSpecialSchool }
+    : { highSchool: officialSources.kaohsiungHighSchool, service: officialSources.kaohsiungService, specialSchool: officialSources.kaohsiungSpecialSchool };
+  const note = isTaichung
+    ? "名額不等於保證安置；實際結果仍以鑑輔會工作小組與臺中市最新公告為準。"
+    : isHighSchool
+      ? "普通班、實用技能學程的各校開缺名額以高雄市安置網站公告為準；此處先列出簡章中的安置學校。"
+      : "名額不等於保證安置；實際結果仍以高雄市身障生安置審議小組與最新公告為準。";
+  return schoolFinderTemplate({
+    source: city,
+    type: sourceKey,
+    title: labels.title,
+    description: labels.description,
+    officialUrl: urls[type],
+    officialLabel: isHighSchool && !isTaichung ? "查看官方簡章與名額公告" : "查看官方簡章",
+    note,
+    placeholder: "例如：臺中高工、餐飲、綜合職能科"
+  });
+}
+
 const taipeiServiceSchoolData = [
   { school: "士林高商", program: "門市服務科", kind: "高級中等學校", group: "服務群科", seats: null },
   { school: "大安高工", program: "餐飲服務科", kind: "高級中等學校", group: "服務群科", seats: null },
@@ -114,6 +150,8 @@ function getSchoolFinderRows(finder) {
   const type = finder.dataset.schoolFinderType;
   if (source === "newTaipei" && typeof newTaipeiSchoolData !== "undefined") return newTaipeiSchoolData[type] || [];
   if (source === "taoyuan" && typeof taoyuanSchoolData !== "undefined") return taoyuanSchoolData[type] || [];
+  if (source === "taichung" && typeof taichungSchoolData !== "undefined") return taichungSchoolData[type.replace("taichung-", "")] || [];
+  if (source === "kaohsiung" && typeof kaohsiungSchoolData !== "undefined") return kaohsiungSchoolData[type.replace("kaohsiung-", "")] || [];
   if (source === "taipeiService") return taipeiServiceSchoolData;
   return [];
 }
@@ -569,6 +607,103 @@ const guides = {
     }
   }
 };
+
+function cityGuide(config) {
+  const source = config.sources[config.type];
+  const typeTitle = config.typeTitle;
+  const schoolTitle = config.type === "highSchool"
+    ? "可選學校、校科與名額"
+    : "可選學校與安置名額";
+  const qualification = config.type === "highSchool"
+    ? "持有鑑輔會核發、不含智能障礙類的鑑定證明，並符合國中畢業或同等學力、通報等規定。"
+    : config.type === "service"
+      ? "持有智能障礙或其他障礙伴隨智能障礙的鑑定證明，並符合年齡、學歷與通報等規定。"
+      : "依簡章所列的障礙類別、程度、學歷與通報條件申請；特殊教育學校通常以較高支持需求學生為優先。";
+  const process = config.type === "service"
+    ? "本類通常包含能力評估與後續安置作業，請以承辦學校通知的評估與分發安排為準。"
+    : "由鑑輔會工作小組依志願、學生資料與學校資源進行適性安置；必要時可能安排晤談。";
+  return {
+    title: `${config.city}${typeTitle}適性輔導安置`,
+    shortTitle: `${config.city}${typeTitle}`,
+    topics: {
+      eligibility: {
+        label: "申請資格",
+        title: "先確認是否適用這一類",
+        body: `
+          <p class="detail-lead">${qualification}</p>
+          <div class="detail-grid two">
+            <article class="info-card"><span class="tag">共同條件</span><h4>學歷與報名身分</h4><p>應屆國中畢業生可由原國中協助報名；非應屆者須符合簡章的學歷、年齡及未曾完成適性安置等規定。</p></article>
+            <article class="info-card"><span class="tag">鑑定與通報</span><h4>以正式簡章為準</h4><p>請先確認鑑輔會鑑定證明的類別與適用教育階段，並由原國中協助核對通報資料。</p></article>
+            <article class="info-card"><span class="tag">報名方式</span><h4>由國中協助辦理</h4><p>由原就讀國中完成網路報名與資料送件；跨區或非應屆情形，應先依簡章向原國中確認。</p></article>
+            <article class="info-card"><span class="tag">只能選一類</span><h4>不可重複報名</h4><p>本市三類安置簡章只能擇一報名，也不得重複參加其他縣市或國教署辦理的適性安置。</p></article>
+          </div>
+          ${sourceNote("依 115 學年度官方簡章的報名資格與安置規定整理。", source)}
+        `
+      },
+      timeline: {
+        label: "重要時程",
+        title: "重要時程",
+        body: `
+          <div class="timeline">
+            ${config.timeline.map((item) => `<article class="timeline-item"><time>${item.date.map((date) => `<span class="timeline-date">${date}</span>`).join("")}</time><div><h3>${item.title}</h3><p>${item.text}</p></div></article>`).join("")}
+          </div>
+          ${sourceNote("依 115 學年度官方簡章的重要日程表整理；校內收件與個別通知時間仍以原國中、承辦學校通知為準。", source)}
+        `
+      },
+      schools: {
+        label: "學校與名額",
+        title: schoolTitle,
+        body: `
+          <p class="detail-lead">${config.schoolLead}</p>
+          ${citySchoolFinderTemplate(config.cityKey, config.type)}
+          <div class="detail-grid two">
+            <article class="info-card"><span class="tag">安置不是保證錄取</span><h4>名額與結果不同</h4><p>公開名額是認識選項的起點，實際安置仍由工作小組依簡章規定、志願及學生資料綜合研判。</p></article>
+            <article class="info-card"><span class="tag">填志願前</span><h4>先看通勤與支持需求</h4><p>建議與國中老師一起確認交通、課程與支持服務，並逐項核對當年度官方公告。</p></article>
+          </div>
+          ${sourceNote("學校、校科與名額依官方簡章及開缺資料整理。", source, "115 學年度官方資料")}
+        `
+      },
+      faq: {
+        label: "簡章重點問答",
+        title: "簡章重點問答",
+        body: `
+          <div class="faq-list">
+            <details><summary>三種類型可以同時報名嗎？</summary><p>不可以。高級中等學校、集中式特教班及特殊教育學校三類簡章只能擇一報名；也不得重複參加其他縣市或國教署的適性安置。</p>${faqBasis("115 學年度正式簡章的安置作業規定", source)}</details>
+            <details><summary>需要由誰幫忙報名？</summary><p>原則上由原就讀國中完成網路報名與資料送件。跨區或非應屆生的程序與文件，請先請原國中依簡章協助核對。</p>${faqBasis("115 學年度正式簡章的報名方式", source)}</details>
+            <details><summary>安置後還可以選其他入學管道嗎？</summary><p>可依簡章規定參加其他入學管道；若重複錄取，最後只能擇一完成報到。完成報到後欲放棄，須依期限及程序辦理。</p>${faqBasis("115 學年度正式簡章的報到與放棄規定", source)}</details>
+            <details><summary>錯過第一輪，還有機會嗎？</summary><p>正式安置後若有餘額，符合資格者可留意官方公告的餘額安置作業與期限。</p>${faqBasis("115 學年度正式簡章的餘額安置規定", source)}</details>
+          </div>
+          ${sourceNote("答案依 115 學年度正式簡章整理。", source)}
+        `
+      }
+    }
+  };
+}
+
+const taichungTimeline = [
+  { date: ["2026/1/2", "2026/1/16"], title: "志願試探與模擬選填", text: "由國中端依公告期程協助辦理。" },
+  { date: ["2026/1/19", "2026/2/26"], title: "網路報名", text: "學生向原就讀國中報名，由國中完成作業。" },
+  { date: ["2026/3/2", "2026/3/3"], title: "報名資料送件審查", text: "國中依排定時間送件。" },
+  { date: ["2026/5/29"], title: "公告安置結果", text: "安置結果及通知單依官方公告辦理。" },
+  { date: ["2026/7/9", "中午 12:00 前"], title: "完成報到", text: "依安置學校規定時間完成報到。" },
+  { date: ["2026/7/31"], title: "公告餘額安置結果", text: "後續餘額安置依官方公告辦理。" }
+];
+
+const kaohsiungTimeline = [
+  { date: ["2026/2/23", "2026/3/3"], title: "國中網路報名", text: "學生向原就讀國中辦理，由國中完成網路報名。" },
+  { date: ["2026/4/11"], title: "能力評估", text: "集中式特教班適用，地點與細節依通知單。" },
+  { date: ["2026/6/1"], title: "公告安置結果", text: "結果公告於高雄市身心障礙學生適性輔導安置網站。" },
+  { date: ["2026/6/15 前"], title: "特教學校完成報到", text: "特殊教育學校依各校所訂時間辦理。" },
+  { date: ["2026/7/8", "2026/7/9 中午 12:00 前"], title: "普通班與實用技能學程報到", text: "依安置學校所訂時間辦理。" },
+  { date: ["2026/7/31"], title: "公告餘額安置結果", text: "後續餘額安置依官方公告辦理。" }
+];
+
+guides["taichung-high-school"] = cityGuide({ city: "臺中市", cityKey: "taichung", type: "highSchool", typeTitle: "高級中等學校", sources: { highSchool: officialSources.taichungHighSchool }, timeline: taichungTimeline, schoolLead: "115 學年度官方開缺資料共有 224 筆校科資料與 938 個名額，包含特殊教育學校的視覺、聽覺障礙類選項。可直接搜尋與篩選。" });
+guides["taichung-service"] = cityGuide({ city: "臺中市", cityKey: "taichung", type: "service", typeTitle: "集中式特教班", sources: { service: officialSources.taichungService }, timeline: taichungTimeline, schoolLead: "115 學年度共有 8 所開缺學校、185 個安置名額；集中式特教班依能力評估結果，採現場依序唱名分發。" });
+guides["taichung-special-school"] = cityGuide({ city: "臺中市", cityKey: "taichung", type: "specialSchool", typeTitle: "特殊教育學校", sources: { specialSchool: officialSources.taichungSpecialSchool }, timeline: taichungTimeline, schoolLead: "115 學年度特教學校資料包含視覺、聽覺與智能障礙類選項。智能障礙類以安置至學校為主，後續由安置學校完成分科。" });
+guides["kaohsiung-high-school"] = cityGuide({ city: "高雄市", cityKey: "kaohsiung", type: "highSchool", typeTitle: "普通班、實用技能學程", sources: { highSchool: officialSources.kaohsiungHighSchool }, timeline: kaohsiungTimeline, schoolLead: "115 學年度簡章列出 50 所安置學校。各校普通班、實用技能學程的開缺名額由高雄市官方安置網站另行公告，請點官方連結核對最新資料。" });
+guides["kaohsiung-service"] = cityGuide({ city: "高雄市", cityKey: "kaohsiung", type: "service", typeTitle: "集中式特教班", sources: { service: officialSources.kaohsiungService }, timeline: kaohsiungTimeline, schoolLead: "115 學年度共有 9 所開缺學校、10 筆校科資料、140 個安置名額；未參加能力評估者不予安置。" });
+guides["kaohsiung-special-school"] = cityGuide({ city: "高雄市", cityKey: "kaohsiung", type: "specialSchool", typeTitle: "特殊教育學校", sources: { specialSchool: officialSources.kaohsiungSpecialSchool }, timeline: kaohsiungTimeline, schoolLead: "115 學年度共有 4 所特殊教育學校、9 筆校科資料、129 個安置名額。部分學校入學後再依學生需求協助選擇科別。" });
 
 const guide = guides[document.body.dataset.guide];
 const detail = document.querySelector("#guideDetail");
