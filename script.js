@@ -672,6 +672,7 @@ function setActiveView(viewName, resetScroll = true) {
     view.hidden = view.dataset.view !== viewName;
   });
   document.body.dataset.currentView = viewName;
+  document.body.classList.toggle("showing-guide-detail", viewName === "info" || viewName === "schools");
 
   const titles = {
     home: "臺北市十二年適性安置",
@@ -712,6 +713,15 @@ function renderRoute() {
 setupSchoolFinder();
 setupConsultation();
 setupCitySwitcher();
+
+document.querySelectorAll(".year-inline").forEach((notice) => {
+  notice.innerHTML = "<strong>準備 116 學年度的家長請注意：</strong>本頁的 115 學年度資料可用來了解申請流程與準備方向。孩子若預計於 116 學年度升讀高中，報名日期、可選學校、名額及資格規定，請以 116 學年度正式簡章為準。";
+});
+
+const footerCheck = document.querySelector(".footer-meta span:last-child");
+if (footerCheck?.textContent.includes("最後核對")) {
+  footerCheck.textContent = footerCheck.textContent.replace("最後核對", "資料核對");
+}
 renderRoute();
 
 window.addEventListener("hashchange", renderRoute);

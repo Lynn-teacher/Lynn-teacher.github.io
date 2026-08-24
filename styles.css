@@ -302,7 +302,7 @@ main > section {
 .official-strip h2,
 .consultation-section h2,
 .notice-section h2 {
-  font-size: 2.25rem;
+  font-size: 2rem;
   font-weight: 480;
 }
 
@@ -736,6 +736,54 @@ footer p {
   max-width: 720px;
 }
 
+.guide-school-finder .finder-heading {
+  margin-bottom: 16px;
+}
+
+.finder-stats,
+.eligibility-summary > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.finder-stats span,
+.eligibility-summary span {
+  border: 1px solid #c8d7ce;
+  border-radius: 999px;
+  padding: 5px 10px;
+  color: var(--blue-dark);
+  background: var(--white);
+  font-size: 0.84rem;
+  font-weight: 750;
+}
+
+.finder-reminder {
+  margin: 12px 0 0;
+  border-left: 3px solid #d5b98f;
+  padding: 8px 11px;
+  color: #735f43;
+  background: var(--gold-soft);
+  font-size: 0.88rem;
+}
+
+.eligibility-summary {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 15px 0;
+}
+
+.eligibility-summary h3 {
+  margin: 0 0 10px;
+  font-size: 1rem;
+}
+
+.eligibility-summary p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
 .finder-controls {
   display: grid;
   grid-template-columns: 1.5fr repeat(3, minmax(0, 1fr));
@@ -1145,7 +1193,7 @@ footer p {
   .detail-section h2,
   .school-finder h2,
   .official-strip h2 {
-    font-size: 1.85rem;
+    font-size: 1.65rem;
   }
 
   .section-heading,
@@ -1957,6 +2005,12 @@ footer p {
   font-size: 0.78rem;
 }
 
+/* 詳情內容已有可追溯的資料來源卡，頁尾不重複顯示同一官方連結。 */
+.showing-guide-detail .site-disclaimer .footer-meta > a:not([href*="docs.google.com/forms"]),
+.showing-guide-detail .site-disclaimer .footer-meta > a:not([href*="docs.google.com/forms"]) + span {
+  display: none;
+}
+
 @media (max-width: 720px) {
   .site-disclaimer-inner {
     width: calc(100% - 28px);
@@ -2060,7 +2114,7 @@ footer p {
   width: 100%;
   margin-top: 24px;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
 }
 
@@ -2103,12 +2157,7 @@ footer p {
   background: #f4eadc;
 }
 
-.county-card.tainan {
-  border-color: #d8c6cb;
-  background: #f5e9eb;
-}
-
-.county-card.other-counties {
+.county-card.national-placement {
   border-color: #d7cde0;
   background: #eee8f2;
 }
@@ -2159,6 +2208,20 @@ footer p {
 .county-card strong {
   font-size: 1.42rem;
   line-height: 1.25;
+}
+
+.county-card small {
+  display: block;
+  margin-top: 4px;
+  color: #75677e;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.county-card.national-placement:hover,
+.county-card.national-placement:focus-visible {
+  border-color: #b5a5c5;
+  background: #e7deed;
 }
 
 .county-status {
@@ -2419,6 +2482,15 @@ footer p {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+/* 國教署分區卡只有名稱與涵蓋範圍，使用較緊湊的選擇密度。 */
+.compact-zone-cards .route-card {
+  min-height: 140px;
+  padding: 18px;
+  align-items: center;
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+  gap: 11px;
+}
+
 .route-card.is-pending {
   position: relative;
   cursor: default;
@@ -2612,6 +2684,13 @@ footer p {
 
   .route-card-grid.three {
     grid-template-columns: 1fr;
+  }
+
+  .compact-zone-cards .route-card {
+    min-height: 124px;
+    padding: 16px;
+    grid-template-columns: 30px minmax(0, 1fr) auto;
+    gap: 8px;
   }
 
   .route-card {

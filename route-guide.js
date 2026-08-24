@@ -43,13 +43,15 @@ function faqBasis(text, url) {
   return `<p class="faq-basis"><span>依據</span><a href="${url}" target="_blank" rel="noreferrer">${text}</a></p>`;
 }
 
-function schoolFinderTemplate({ source, type, title, description, officialUrl, officialLabel, note, placeholder = "例如：三重商工、餐飲、普通科" }) {
+function schoolFinderTemplate({ source, type, title, description, officialUrl, officialLabel, note, assessmentNote = "", placeholder = "例如：三重商工、餐飲、普通科" }) {
   return `
     <section class="school-finder guide-school-finder" data-school-finder-source="${source}" data-school-finder-type="${type}" aria-labelledby="schoolFinderTitle">
       <div class="finder-heading">
         <div><h3 id="schoolFinderTitle">${title}</h3><p>${description}</p></div>
         <a class="text-link" href="${officialUrl}" target="_blank" rel="noreferrer">${officialLabel}</a>
       </div>
+      <div class="finder-stats" data-school-stats aria-label="官方資料摘要"></div>
+      ${assessmentNote ? `<p class="finder-reminder">${assessmentNote}</p>` : ""}
       <div class="finder-controls" aria-label="校科篩選條件">
         <label class="search-box"><span>搜尋學校或科別</span><input data-school-search type="search" placeholder="${placeholder}" /></label>
         <label class="search-box" data-school-filter="district"><span>分區</span><select data-school-district><option value="all">全部分區</option></select></label>
@@ -70,7 +72,7 @@ function newTaipeiSchoolFinderTemplate(type) {
   return schoolFinderTemplate({
     source: "newTaipei",
     type,
-    title: isGeneral ? "可選學校與校科" : "可選學校與安置名額",
+    title: "搜尋學校與科別",
     description: isGeneral
       ? "輸入校名或科別，再依分區、學校類型或群別縮小範圍。"
       : "輸入校名，再依學校類型縮小範圍。名額分為第一、第二階段，請依能力評估結果與簡章規定選填。",
@@ -85,7 +87,7 @@ function taoyuanSchoolFinderTemplate(type) {
   return schoolFinderTemplate({
     source: "taoyuan",
     type,
-    title: isHighSchool ? "可選學校、校科與名額" : "可選學校與安置名額",
+    title: "搜尋學校與科別",
     description: isHighSchool
       ? "輸入校名或科別，再依學程、群別或學校縮小範圍。"
       : "輸入校名、科別或技能領域，查看各開缺學校與安置名額。",
@@ -100,7 +102,7 @@ function taipeiServiceSchoolFinderTemplate() {
   return schoolFinderTemplate({
     source: "taipeiService",
     type: "service",
-    title: "可選學校與科別",
+    title: "搜尋學校與科別",
     description: "輸入校名或科別，再依安置學校類型縮小範圍。",
     officialUrl: officialSources.taipeiService,
     officialLabel: "查看正式簡章",
@@ -116,8 +118,8 @@ function citySchoolFinderTemplate(city, type) {
   const isService = type === "service";
   const sourceKey = `${city}-${type}`;
   const labels = isHighSchool
-    ? { title: "可選學校、校科與名額", description: "輸入校名或科別，再依學校類型或群別縮小範圍。" }
-    : { title: "可選學校與安置名額", description: "輸入校名、科別或技能領域，查看官方列出的安置資料。" };
+    ? { title: "搜尋學校與科別", description: "輸入校名或科別，再依學校類型或群別縮小範圍。" }
+    : { title: "搜尋學校與科別", description: "輸入校名、科別或技能領域，查看官方列出的安置資料。" };
   const urls = isTainan
     ? { highSchool: officialSources.tainanVacancies, service: officialSources.tainanVacancies, specialSchool: officialSources.tainanVacancies }
     : isTaichung
@@ -136,6 +138,7 @@ function citySchoolFinderTemplate(city, type) {
     officialUrl: urls[type],
     officialLabel: isTainan || (isHighSchool && !isTaichung) ? "查看官方開缺名單" : "查看官方簡章",
     note,
+    assessmentNote: city === "kaohsiung" && isService ? "提醒：須完成能力評估，才納入安置作業。" : "",
     placeholder: "例如：臺中高工、餐飲、綜合職能科"
   });
 }
@@ -174,11 +177,22 @@ function bindSchoolFinder() {
   const district = finder.querySelector("[data-school-district]");
   const kind = finder.querySelector("[data-school-kind]");
   const group = finder.querySelector("[data-school-group]");
+  const stats = finder.querySelector("[data-school-stats]");
   const summary = finder.querySelector("[data-school-summary]");
   const results = finder.querySelector("[data-school-results]");
   const more = finder.querySelector("[data-school-more]");
   const empty = finder.querySelector("[data-school-empty]");
   let visibleCount = 20;
+
+  const totalSchoolCount = new Set(rows.map((row) => row.school)).size;
+  const totalSeatCount = rows.reduce((total, row) => total + (Number.isFinite(row.seats) ? row.seats : 0), 0);
+  const hasTotalSeats = rows.some((row) => Number.isFinite(row.seats));
+  const recordLabel = finder.dataset.schoolFinderType.endsWith("service") ? "筆安置資料" : "筆校科資料";
+  stats.innerHTML = [
+    `${totalSchoolCount} 所開缺學校`,
+    `${rows.length} ${recordLabel}`,
+    hasTotalSeats ? `${totalSeatCount} 個安置名額` : "名額以官方公告為準"
+  ].map((label) => `<span>${label}</span>`).join("");
 
   const populate = (control, values, emptyLabel) => {
     if (values.length < 2) {
@@ -207,7 +221,6 @@ function bindSchoolFinder() {
     const seatCount = filtered.reduce((total, row) => total + (Number.isFinite(row.seats) ? row.seats : 0), 0);
     const hasSeats = filtered.some((row) => Number.isFinite(row.seats));
 
-    const recordLabel = finder.dataset.schoolFinderType === "service" ? "筆安置資料" : "筆校科資料";
     summary.textContent = hasSeats
       ? `115 學年度官方資料｜找到 ${schoolCount} 所學校、${filtered.length} ${recordLabel}，合計 ${seatCount} 名`
       : `115 學年度官方資料｜找到 ${schoolCount} 所學校`;
@@ -619,14 +632,12 @@ const guides = {
 function cityGuide(config) {
   const source = config.sources[config.type];
   const typeTitle = config.typeTitle;
-  const schoolTitle = config.type === "highSchool"
-    ? "可選學校、校科與名額"
-    : "可選學校與安置名額";
-  const qualification = config.type === "highSchool"
+  const schoolTitle = "可選學校";
+  const qualification = config.eligibilitySummary || (config.type === "highSchool"
     ? "持有鑑輔會核發、不含智能障礙類的鑑定證明，並符合國中畢業或同等學力、通報等規定。"
     : config.type === "service"
       ? "持有智能障礙或其他障礙伴隨智能障礙的鑑定證明，並符合年齡、學歷與通報等規定。"
-      : "依簡章所列的障礙類別、程度、學歷與通報條件申請；特殊教育學校通常以較高支持需求學生為優先。";
+      : "依簡章所列的障礙類別、程度、學歷與通報條件申請；特殊教育學校通常以較高支持需求學生為優先。");
   const process = config.type === "service"
     ? "本類通常包含能力評估與後續安置作業，請以承辦學校通知的評估與分發安排為準。"
     : "由鑑輔會工作小組依志願、學生資料與學校資源進行適性安置；必要時可能安排晤談。";
@@ -636,9 +647,10 @@ function cityGuide(config) {
     topics: {
       eligibility: {
         label: "申請資格",
-        title: "先確認是否適用這一類",
+        title: "哪些學生適用？",
         body: `
           <p class="detail-lead">${qualification}</p>
+          ${config.eligibilityCriteria ? `<section class="eligibility-summary" aria-label="申請條件摘要"><h3>還要同時符合</h3><div>${config.eligibilityCriteria.map((item) => `<span>${item}</span>`).join("")}</div><p>資格仍以正式簡章與承辦單位審核為準。</p></section>` : ""}
           <div class="detail-grid two">
             <article class="info-card"><span class="tag">共同條件</span><h4>學歷與報名身分</h4><p>應屆國中畢業生可由原國中協助報名；非應屆者須符合簡章的學歷、年齡及未曾完成適性安置等規定。</p></article>
             <article class="info-card"><span class="tag">鑑定與通報</span><h4>以正式簡章為準</h4><p>請先確認鑑輔會鑑定證明的類別與適用教育階段，並由原國中協助核對通報資料。</p></article>
@@ -721,7 +733,7 @@ guides["taichung-high-school"] = cityGuide({ city: "臺中市", cityKey: "taichu
 guides["taichung-service"] = cityGuide({ city: "臺中市", cityKey: "taichung", type: "service", typeTitle: "集中式特教班", sources: { service: officialSources.taichungService }, timeline: taichungTimeline, schoolLead: "115 學年度共有 8 所開缺學校、185 個安置名額；集中式特教班依能力評估結果，採現場依序唱名分發。" });
 guides["taichung-special-school"] = cityGuide({ city: "臺中市", cityKey: "taichung", type: "specialSchool", typeTitle: "特殊教育學校", sources: { specialSchool: officialSources.taichungSpecialSchool }, timeline: taichungTimeline, schoolLead: "115 學年度特教學校資料包含視覺、聽覺與智能障礙類選項。智能障礙類以安置至學校為主，後續由安置學校完成分科。" });
 guides["kaohsiung-high-school"] = cityGuide({ city: "高雄市", cityKey: "kaohsiung", type: "highSchool", typeTitle: "普通班、實用技能學程", sources: { highSchool: officialSources.kaohsiungHighSchoolSeats }, timeline: kaohsiungTimeline, schoolLead: "115 學年度官方名額表共有 195 筆校科資料、52 所學校與 882 個安置名額，包含普通班與實用技能學程。可直接依行政區、學校類型或群別篩選。" });
-guides["kaohsiung-service"] = cityGuide({ city: "高雄市", cityKey: "kaohsiung", type: "service", typeTitle: "集中式特教班", sources: { service: officialSources.kaohsiungService }, timeline: kaohsiungTimeline, schoolLead: "115 學年度共有 9 所開缺學校、10 筆校科資料、140 個安置名額；未參加能力評估者不予安置。" });
+guides["kaohsiung-service"] = cityGuide({ city: "高雄市", cityKey: "kaohsiung", type: "service", typeTitle: "集中式特教班", sources: { service: officialSources.kaohsiungService }, timeline: kaohsiungTimeline, schoolLead: "依官方名額表查詢可選學校、科別與安置名額。", eligibilitySummary: "主要適用：智能障礙，或其他障礙伴隨智能障礙的學生。", eligibilityCriteria: ["年齡", "學歷", "特教通報", "正式鑑定"] });
 guides["kaohsiung-special-school"] = cityGuide({ city: "高雄市", cityKey: "kaohsiung", type: "specialSchool", typeTitle: "特殊教育學校", sources: { specialSchool: officialSources.kaohsiungSpecialSchool }, timeline: kaohsiungTimeline, schoolLead: "115 學年度共有 4 所特殊教育學校、9 筆校科資料、129 個安置名額。部分學校入學後再依學生需求協助選擇科別。" });
 guides["tainan-high-school"] = cityGuide({ city: "臺南區", cityKey: "tainan", type: "highSchool", typeTitle: "高級中等學校", sources: { highSchool: officialSources.tainanGuide }, timeline: tainanTimeline, schoolLead: "臺南市參與國教署聯合安置的臺南區作業。115 學年度官方開缺資料有 171 筆校科資料、46 所學校與 586 個名額，包含高級中等學校及實用技能學程，可直接搜尋與篩選。" });
 guides["tainan-service"] = cityGuide({ city: "臺南區", cityKey: "tainan", type: "service", typeTitle: "集中式特教班", sources: { service: officialSources.tainanGuide }, timeline: tainanTimeline, schoolLead: "115 學年度共有 6 所開缺學校、6 筆校科資料與 98 個安置名額。學生須參加能力評估，再依作業安排安置。" });
@@ -730,10 +742,22 @@ guides["tainan-special-school"] = cityGuide({ city: "臺南區", cityKey: "taina
 const guide = guides[document.body.dataset.guide];
 const detail = document.querySelector("#guideDetail");
 
+function updateAcademicYearNotice() {
+  document.querySelectorAll(".year-inline").forEach((notice) => {
+    notice.innerHTML = "<strong>準備 116 學年度的家長請注意：</strong>本頁的 115 學年度資料可用來了解申請流程與準備方向。孩子若預計於 116 學年度升讀高中，報名日期、可選學校、名額及資格規定，請以 116 學年度正式簡章為準。";
+  });
+}
+
+const footerCheck = document.querySelector(".footer-meta span:last-child");
+if (footerCheck?.textContent.includes("最後核對")) {
+  footerCheck.textContent = footerCheck.textContent.replace("最後核對", "資料核對");
+}
+
 function setGuideView(viewName) {
   document.querySelectorAll("[data-guide-view]").forEach((view) => {
     view.hidden = view.dataset.guideView !== viewName;
   });
+  document.body.classList.toggle("showing-guide-detail", viewName === "info");
   window.scrollTo({ top: 0, behavior: "auto" });
 }
 
@@ -765,5 +789,6 @@ document.querySelectorAll(".city-switcher-select").forEach((select) => {
   });
 });
 
+updateAcademicYearNotice();
 renderGuideRoute();
 window.addEventListener("hashchange", renderGuideRoute);
