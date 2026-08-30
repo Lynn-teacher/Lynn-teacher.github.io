@@ -2238,6 +2238,457 @@ footer p {
   padding-bottom: 16px;
 }
 
+/* 116 學年度入口、歷年提醒與導覽頁 */
+.topbar-link,
+.text-link,
+.year-status-actions a {
+  color: var(--blue-dark);
+  font-size: 0.9rem;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.home-topbar .brand,
+.homepage-actions .text-link,
+.site-disclaimer .footer-meta a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.homepage-actions .text-link {
+  justify-content: center;
+}
+
+.topbar-link:hover,
+.topbar-link:focus-visible,
+.text-link:hover,
+.text-link:focus-visible,
+.year-status-actions a:hover,
+.year-status-actions a:focus-visible {
+  text-decoration: underline;
+}
+
+.county-heading-116 .eyebrow,
+.guide-hero .eyebrow,
+.year-status-stage .eyebrow,
+.history-stage .eyebrow,
+.policy-stage .eyebrow {
+  margin: 0 0 8px;
+  color: #9b665f;
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+.county-lead {
+  max-width: 620px;
+  margin: 14px auto 0;
+  color: var(--muted);
+}
+
+.site-trust-note,
+.guide-caveat,
+.history-intro {
+  max-width: 720px;
+  margin: 13px auto 0;
+  border-left: 3px solid var(--green);
+  padding-left: 12px;
+  color: #53625a;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.county-grid-116 .county-card {
+  min-height: 140px;
+}
+
+.county-card .status {
+  margin-top: 7px;
+  font-size: 0.83rem;
+}
+
+.county-card .status-ready {
+  color: #376348;
+}
+
+.county-card .status-waiting {
+  color: #75677e;
+}
+
+.homepage-actions {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px 20px;
+}
+
+.year-status-page,
+.guide-page,
+.history-page,
+.policy-page {
+  min-height: calc(100vh - 88px);
+  min-height: calc(100svh - 88px);
+  background: var(--paper);
+}
+
+.year-status-stage,
+.guide-stage,
+.history-stage,
+.policy-stage {
+  width: min(940px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 72px 0;
+}
+
+.year-status-stage {
+  max-width: 780px;
+  text-align: center;
+}
+
+.year-status-stage h1,
+.guide-hero h1,
+.history-stage h1,
+.policy-stage h1 {
+  margin: 0;
+  font-family: "Noto Serif TC", "Songti TC", serif;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.announcement-status {
+  margin: 32px auto 0;
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--green);
+  border-radius: 10px;
+  padding: 28px;
+  background: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.announcement-status .status-label,
+.checked-date {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.announcement-status h2 {
+  margin: 8px 0;
+  font-size: 1.4rem;
+}
+
+.announcement-status .button {
+  margin-top: 12px;
+}
+
+.checked-date {
+  margin-top: 15px;
+}
+
+.year-status-actions {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px 24px;
+}
+
+.guide-hero {
+  max-width: 750px;
+  margin: 0 auto 34px;
+  text-align: center;
+}
+
+.guide-hero > p:not(.eyebrow) {
+  margin: 16px 0 0;
+  color: var(--muted);
+}
+
+.type-guide-grid,
+.history-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.type-guide-card,
+.history-grid section,
+.policy-stage section,
+.guide-next-step {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 24px;
+  background: var(--white);
+}
+
+.type-guide-card:nth-child(1) { border-top: 4px solid #c99d96; }
+.type-guide-card:nth-child(2) { border-top: 4px solid #9db6a1; }
+.type-guide-card:nth-child(3) { border-top: 4px solid #9eb9c4; }
+.type-guide-card h2,
+.guide-next-step h2,
+.history-grid h2,
+.policy-stage h2 { margin: 5px 0 10px; font-size: 1.3rem; }
+.type-guide-card h3 { margin: 22px 0 5px; color: var(--blue); font-size: 0.92rem; }
+.type-guide-card p { margin: 0; color: var(--muted); font-size: 0.94rem; }
+.type-guide-card .guide-number { color: var(--blue); font-weight: 800; }
+
+.guide-next-step {
+  margin-top: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.guide-next-step p { margin: 0; color: var(--muted); }
+.guide-next-step .button { flex: 0 0 auto; }
+.guide-caveat { margin: 24px 0 0; }
+
+.history-stage > h1,
+.policy-stage > h1 { margin-bottom: 16px; }
+.history-intro { margin: 0 0 30px; }
+.history-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.history-grid a { display: block; padding: 7px 0; color: var(--blue-dark); font-weight: 700; }
+
+.policy-stage { max-width: 760px; }
+.policy-updated { color: var(--muted); font-size: 0.9rem; }
+.policy-stage section { margin-top: 14px; }
+.policy-stage section p { margin: 0; color: var(--muted); }
+.policy-stage section a { color: var(--blue-dark); }
+
+.historic-notice {
+  width: min(1120px, calc(100% - 40px));
+  margin: 22px auto 0;
+  border: 1px solid #decdb8;
+  border-left: 4px solid #b17e51;
+  border-radius: 8px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px 14px;
+  color: #635645;
+  background: #fbf3e7;
+  font-size: 0.9rem;
+}
+
+.historic-notice a { color: #70502f; font-weight: 800; }
+
+@media (max-width: 720px) {
+  .county-portal-116 { min-height: auto; }
+  .county-stage { padding-top: 28px; padding-bottom: 34px; justify-content: flex-start; }
+  .county-heading h1 { font-size: 2.35rem; }
+  .county-grid-116 { margin-top: 22px; }
+  .county-grid-116 .county-card { min-height: 132px; padding: 15px 13px; }
+  .county-card strong { font-size: 1.18rem; }
+  .county-card small { font-size: 0.74rem; }
+  .topbar-link { min-height: 44px; display: inline-flex; align-items: center; }
+  .type-guide-grid,
+  .history-grid { grid-template-columns: 1fr; }
+  .year-status-stage,
+  .guide-stage,
+  .history-stage,
+  .policy-stage { width: calc(100% - 28px); padding: 44px 0; }
+  .announcement-status { padding: 22px; }
+  .guide-next-step { align-items: stretch; flex-direction: column; }
+  .guide-next-step .button { width: 100%; }
+  .historic-notice { width: calc(100% - 28px); align-items: flex-start; flex-direction: column; }
+}
+
+/* 首頁採用社群分享圖的紙感資訊卡風格 */
+.county-portal-116 {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #f8f7f1;
+}
+
+.county-portal-116::before {
+  position: absolute;
+  z-index: -1;
+  top: 108px;
+  left: -180px;
+  width: 470px;
+  height: 470px;
+  border: 2px dashed rgba(114, 143, 120, 0.68);
+  border-radius: 48% 52% 52% 48%;
+  content: "";
+  transform: rotate(-19deg);
+}
+
+.portal-shape,
+.portal-mini-card {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.portal-shape-sage {
+  top: -205px;
+  left: -155px;
+  width: 470px;
+  height: 470px;
+  border-radius: 50%;
+  background: #becbb9;
+}
+
+.portal-shape-rose {
+  right: -220px;
+  bottom: -260px;
+  width: 630px;
+  height: 630px;
+  border-radius: 50%;
+  background: #dba597;
+}
+
+.portal-mini-card {
+  width: 150px;
+  height: 112px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  background: rgba(255, 254, 250, 0.86);
+  box-shadow: 0 12px 28px rgba(59, 70, 68, 0.12);
+}
+
+.portal-mini-card::before,
+.portal-mini-card::after {
+  position: absolute;
+  left: 26px;
+  width: 74px;
+  height: 8px;
+  border-radius: 99px;
+  content: "";
+}
+
+.portal-mini-card::before { top: 30px; }
+.portal-mini-card::after { top: 51px; width: 55px; }
+.portal-mini-card-sage { top: 75px; right: 11%; }
+.portal-mini-card-sage::before,
+.portal-mini-card-sage::after { background: #d6ddcc; }
+.portal-mini-card-blue { bottom: 52px; right: 8%; width: 170px; height: 140px; background: #6f91a8; opacity: 0.92; }
+.portal-mini-card-blue::before,
+.portal-mini-card-blue::after { display: none; }
+
+.county-portal-116 .home-topbar {
+  position: relative;
+  z-index: 1;
+  width: min(1120px, calc(100% - 56px));
+}
+
+.county-portal-116 .county-stage {
+  position: relative;
+  z-index: 1;
+  width: min(1020px, calc(100% - 56px));
+  padding-top: 66px;
+  padding-bottom: 54px;
+}
+
+.county-heading-116 .eyebrow {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 5px 13px;
+  border: 1px solid #afc0a7;
+  border-radius: 999px;
+  color: #5f785f;
+  background: rgba(255, 254, 250, 0.78);
+  letter-spacing: 0.04em;
+}
+
+.county-heading-116 h1 {
+  max-width: 900px;
+  font-size: clamp(3rem, 5.6vw, 5.25rem);
+  line-height: 1.12;
+  letter-spacing: 0.01em;
+  text-wrap: balance;
+}
+
+.mobile-heading-break { display: block; }
+
+.county-grid-116 {
+  max-width: 940px;
+  margin-top: 42px;
+  gap: 17px;
+}
+
+.county-grid-116 .county-card {
+  min-height: 152px;
+  border: 1px solid rgba(211, 217, 209, 0.94);
+  border-top: 4px solid var(--card-accent, #b4c4ae);
+  border-radius: 18px;
+  padding: 23px 21px;
+  background: rgba(255, 254, 250, 0.92);
+  box-shadow: 0 10px 24px rgba(59, 70, 68, 0.09);
+  backdrop-filter: blur(5px);
+}
+
+.county-grid-116 .county-card.taipei { --card-accent: #cf9c93; }
+.county-grid-116 .county-card.new-taipei { --card-accent: #8ea88f; }
+.county-grid-116 .county-card.taoyuan { --card-accent: #d1b867; }
+.county-grid-116 .county-card.taichung { --card-accent: #8aa9bb; }
+.county-grid-116 .county-card.kaohsiung { --card-accent: #cda77e; }
+.county-grid-116 .county-card.national-placement { --card-accent: #a99abe; }
+
+.county-grid-116 .county-card:hover,
+.county-grid-116 .county-card:focus-visible {
+  border-color: var(--card-accent, #b4c4ae);
+  background: #fffefa;
+  box-shadow: 0 14px 30px rgba(59, 70, 68, 0.15);
+}
+
+.county-grid-116 .county-number {
+  width: 31px;
+  height: 31px;
+  border-radius: 50%;
+  display: inline-grid;
+  place-items: center;
+  color: #fffefa;
+  background: var(--card-accent, #b4c4ae);
+  font-size: 0.72rem;
+}
+
+.county-grid-116 .county-card strong {
+  font-family: "Noto Serif TC", "Songti TC", serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.02em;
+}
+
+.county-grid-116 .county-card small { font-size: 0.8rem; }
+.county-grid-116 .county-card .status { color: #4f5b5b; font-weight: 800; }
+
+.homepage-actions { margin-top: 31px; }
+.homepage-actions .button.secondary {
+  border-color: #afc0a7;
+  border-radius: 999px;
+  color: #4e6754;
+  background: rgba(255, 254, 250, 0.87);
+  box-shadow: 0 5px 14px rgba(59, 70, 68, 0.06);
+}
+
+.homepage-actions .button.secondary:hover,
+.homepage-actions .button.secondary:focus-visible { background: #fffefa; }
+.homepage-actions .text-link { color: #4f7086; }
+
+.county-portal-116 + .portal-footer { position: relative; z-index: 1; background: #edf3ed; }
+
+@media (max-width: 720px) {
+  .county-portal-116::before { top: 80px; left: -178px; width: 360px; height: 360px; }
+  .portal-shape-sage { top: -145px; left: -150px; width: 320px; height: 320px; }
+  .portal-shape-rose { right: -230px; bottom: -320px; width: 460px; height: 460px; }
+  .portal-mini-card-sage { display: none; }
+  .portal-mini-card-blue { right: -60px; bottom: 60px; transform: scale(0.72); }
+  .county-portal-116 .home-topbar,
+  .county-portal-116 .county-stage { width: calc(100% - 28px); }
+  .county-portal-116 .county-stage { padding-top: 47px; padding-bottom: 38px; }
+  .county-heading-116 h1 { max-width: 330px; margin: 0 auto; font-size: 2.7rem; line-height: 1.16; }
+  .county-grid-116 { margin-top: 32px; gap: 12px; }
+  .county-grid-116 .county-card { min-height: 138px; border-radius: 14px; padding: 18px 13px; }
+  .county-grid-116 .county-card strong { font-size: 1.16rem; }
+  .county-grid-116 .county-number { width: 28px; height: 28px; }
+}
+
 .route-choice {
   margin-top: 20px;
   border-top: 1px solid var(--line);
