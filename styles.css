@@ -3344,3 +3344,42 @@ footer p {
   .placement-callout h2 { font-size: 1.55rem; }
   .placement-callout .button { width: 100%; }
 }
+
+/* September parent navigation refresh */
+.parent-portal, .cards-page { --muted: #555f60; }
+.cards-hero { padding: 48px 0 24px; }
+.guide-topics { width: min(960px, calc(100% - 40px)); margin: 0 auto 26px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.guide-topics a { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 16px; border: 1px solid #bccac2; border-radius: 100px; color: #36564b; background: #edf4ee; text-decoration: none; font-weight: 600; }
+.guide-topics a:hover { background: #dfece1; }
+.card-library { padding: 0; }
+.card-collection { scroll-margin-top: 24px; }
+.card-collection:target { border-color: #58796b; }
+.card-collection summary b { font-size: 0.93rem; }
+.guide-topics a:focus-visible, .teacher-contact:focus-visible, .card-collection summary:focus-visible { outline: 3px solid #4e6b80; outline-offset: 3px; }
+.teacher-about { width: min(1080px, calc(100% - 40px)); margin: 0 auto 64px; padding: 36px 0 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: 170px minmax(0, 660px); gap: 36px; align-items: center; }
+.teacher-about-mark { width: 150px; height: 150px; border-radius: 50%; background: #e8eee5; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; font-weight: 700; color: #41594e; }
+.teacher-about-mark .brand-mark { width: 40px; height: 40px; }
+.teacher-about h2 { margin: 0 0 16px; font-family: "Noto Serif TC", "Songti TC", serif; font-size: 1.75rem; font-weight: 600; }
+.teacher-about p { margin: 0 0 12px; color: var(--muted); line-height: 1.85; }
+.teacher-contact { display: inline-flex; align-items: center; min-height: 44px; color: var(--blue-dark); font-weight: 700; text-underline-offset: 5px; }
+.county-portal-116 .county-stage { padding-top: 38px; }
+.county-heading-116 h1 { font-size: clamp(2rem, 4.2vw, 3.6rem); line-height: 1.25; }
+.county-selection-help { margin: 20px 0 0; color: #405951; font-size: 1.06rem; line-height: 1.7; }
+@media (max-width: 720px) {
+  .parent-portal-hero { padding-top: 30px; }
+  .parent-portal-hero h1 { font-size: clamp(1.65rem, 7vw, 2.3rem); }
+  .parent-portal-card { min-height: 0; padding: 16px; display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 4px 14px; }
+  .parent-portal-card > span { grid-column: 2; }
+  .parent-portal-card .parent-portal-illustration { grid-column: 1; grid-row: 1 / 5; width: 76px; height: 100px; margin: 0; align-self: center; }
+  .parent-portal-card strong, .parent-portal-card small, .parent-portal-card b { grid-column: 2; margin: 0; }
+  .parent-portal-card strong { font-size: 1.05rem; }
+  .parent-portal-card b { padding-top: 6px; }
+  .cards-hero { padding: 32px 0 22px; }
+  .guide-topics { width: calc(100% - 28px); justify-content: flex-start; gap: 8px; }
+  .guide-topics a { font-size: 0.9rem; padding: 8px 12px; }
+  .teacher-about { width: calc(100% - 28px); grid-template-columns: 1fr; gap: 22px; margin-bottom: 40px; padding-top: 28px; }
+  .teacher-about-mark { width: 112px; height: 112px; }
+  .teacher-about h2 { font-size: 1.55rem; }
+  .county-portal-116 .county-stage { padding-top: 30px; }
+  .county-selection-help { font-size: 1rem; }
+}
