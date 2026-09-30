@@ -1,7 +1,7 @@
 document.querySelectorAll('.card-collection').forEach((collection) => {
   const pages = collection.querySelector('.card-pages');
   const images = [...pages.querySelectorAll('img')];
-  const title = collection.querySelector('h2').textContent.trim();
+  const title = collection.querySelector('.guide-title').textContent.trim();
   let current = 0;
 
   const controls = document.createElement('div');
@@ -45,6 +45,11 @@ document.querySelectorAll('.card-collection').forEach((collection) => {
 function openLinkedCollection() {
   const id = location.hash.slice(1);
   const collection = document.getElementById(id);
+  if (collection?.classList.contains('guide-topic-group')) {
+    document.querySelectorAll('.card-collection').forEach((item) => { item.open = false; });
+    requestAnimationFrame(() => collection.scrollIntoView({ block: 'start' }));
+    return;
+  }
   if (!collection?.classList.contains('card-collection')) return;
   document.querySelectorAll('.card-collection').forEach((item) => {
     item.open = item === collection;

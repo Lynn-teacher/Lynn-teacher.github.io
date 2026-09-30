@@ -46,7 +46,7 @@
     if (control) {
       const collection = control.closest('.card-collection');
       event('navigate_guide_card', {
-        guide_name: label(collection, 'h2'),
+        guide_name: label(collection, '.guide-title'),
         direction: control.dataset.direction,
         card_number: collection.querySelector('.card-page-number')?.textContent.trim(),
       });
@@ -55,7 +55,7 @@
 
   document.querySelectorAll('.card-collection').forEach((collection) => {
     collection.addEventListener('toggle', () => {
-      if (collection.open) event('open_parent_guide', { guide_name: label(collection, 'h2') });
+      if (collection.open) event('open_parent_guide', { guide_name: label(collection, '.guide-title') });
     });
   });
 })();
