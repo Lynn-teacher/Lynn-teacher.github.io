@@ -36,3 +36,97 @@
 .copy-card-link:focus-visible, .card-share-link:focus-visible { outline: 3px solid #4e6b80; outline-offset: 3px; }
 .parent-next-steps, .county-coverage, .announcement-stages { text-align: left; }
 .parent-next-steps ol, .county-coverage ul { padding-left: 1.35em; }
+
+/* Reading controls: native details remain readable when JavaScript is unavailable. */
+.card-collection [hidden] { display: none !important; }
+.guide-meta { margin: 0; padding: 14px 20px 0; color: #596661; font-size: .85rem; }
+.reading-modes { display: flex; gap: 8px; padding: 14px 20px; }
+.reading-modes button, .close-guide, .zoom-card, .zoom-toolbar button { min-height: 44px; padding: 8px 16px; border: 1px solid #9aae9e; border-radius: 8px; background: #fffefa; color: #365447; font: inherit; cursor: pointer; }
+.reading-modes button[aria-pressed="true"] { background: #365447; color: #fff; border-color: #365447; }
+.card-text.has-reader { border: 0; padding-top: 0; }
+.card-text.has-reader > summary { display: none; }
+.card-pages img[role="button"] { cursor: zoom-in; }
+.zoom-card { display: block; margin: 14px auto 0; }
+.guide-related, .guide-source, .guide-actions { padding: 16px 20px; margin: 0; border-top: 1px solid #d8dfdc; line-height: 1.8; }
+.guide-related a, .guide-source a, .guide-actions a { color: #365447; text-underline-offset: 4px; }
+.guide-source { font-size: .9rem; }
+.guide-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 20px; }
+.guide-actions a { display: inline-flex; align-items: center; min-height: 44px; }
+.reading-modes button:focus-visible, .close-guide:focus-visible, .zoom-card:focus-visible, .zoom-toolbar button:focus-visible, .card-pages img:focus-visible, .guide-actions a:focus-visible, .guide-related a:focus-visible { outline: 3px solid #4e6b80; outline-offset: 3px; }
+.card-zoom-dialog { width: min(960px, 96vw); max-width: 96vw; max-height: 94dvh; padding: 0; border: 1px solid #9aae9e; border-radius: 12px; background: #fffefa; }
+.card-zoom-dialog::backdrop { background: rgb(25 35 30 / 75%); }
+.zoom-toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 12px; position: sticky; top: 0; z-index: 1; background: #fffefa; border-bottom: 1px solid #d8dfdc; }
+.zoom-toolbar h2 { flex: 1 1 220px; margin: 0; font-size: 1rem; line-height: 1.5; }
+.zoom-image-area { overflow: auto; max-height: 72dvh; padding: 10px; }
+.zoom-image-area img { display: block; width: 100%; max-width: 720px; height: auto; margin: auto; }
+.card-zoom-dialog.is-zoomed .zoom-image-area img { width: auto; max-width: none; }
+@media (max-width: 720px) { .reading-modes { padding: 12px 14px; } .reading-modes button { flex: 1; } .guide-meta,.guide-source,.guide-related,.guide-actions { padding-left: 14px; padding-right: 14px; } }
+
+/* Put the county choice and current announcement status before longer advice. */
+.county-portal-116 .county-heading-116 h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); }
+.county-portal-116 .county-grid-116 { margin-top: 24px; }
+.county-portal-116 .county-grid-116 .county-card { display: block; min-height: 134px; }
+.county-portal-116 .placement-status-note { margin: 18px auto 0; }
+.county-portal-116 .portal-shape, .county-portal-116 .portal-mini-card { display: none; }
+.year-status-stage { padding-top: 36px; }
+.year-status-stage h1 { font-size: clamp(1.8rem, 4vw, 2.7rem); }
+.announcement-status { margin-top: 24px; text-align: left; }
+.official-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.announcement-evidence { line-height: 1.8; }
+.guide-next-step p { line-height: 1.8; }
+.guide-hero h1 { font-size: clamp(1.75rem, 4vw, 2.7rem); line-height: 1.45; text-wrap: balance; }
+@media(max-width:720px) {
+  .county-portal-116 .county-grid-116 { grid-template-columns: 1fr; gap: 10px; }
+  .county-portal-116 .county-grid-116 .county-card { min-height: 0; padding: 14px 16px; }
+  .county-portal-116 .county-grid-116 .county-card > span { display: grid; grid-template-columns: 1fr; gap: 3px; }
+  .county-portal-116 .county-grid-116 .county-card small { margin: 0; font-size: .88rem; }
+  .county-portal-116 .county-grid-116 .county-card strong { font-size: 1.15rem; }
+  .year-status-stage { padding-top: 28px; }
+  .guide-stage { padding-top: 28px; }
+  .official-actions .button { width: 100%; }
+  .parent-portal-card strong { line-height: 1.55; }
+}
+
+/* Small additions follow the existing page width and keep explanations folded. */
+.parent-faq .faq-list { display: block; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--white); box-shadow: var(--shadow); }
+.parent-faq .faq-item { padding: 0; margin: 0; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; box-shadow: none; }
+.parent-faq .faq-item:last-child { border-bottom: 0; }
+.faq-item > summary { min-height: 48px; padding: 14px 48px 14px 20px; position: relative; list-style: none; cursor: pointer; font-weight: 600; line-height: 1.6; }
+.faq-item > summary::-webkit-details-marker { display: none; }
+.faq-item > summary::after { content: '+'; position: absolute; right: 20px; top: 14px; color: #405e50; }
+.faq-item[open] > summary { background: #fafbf8; }
+.faq-item[open] > summary::after { content: '−'; }
+.faq-answer { padding: 4px 20px 16px; line-height: 1.85; }
+.faq-answer p { max-width: 720px; margin: 0 0 6px; }
+.faq-answer a { color: #365447; text-underline-offset: 4px; display: inline-flex; align-items: center; min-height: 44px; }
+.faq-item > summary:focus-visible, .faq-answer a:focus-visible, .meeting-download a:focus-visible, .schedule-table a:focus-visible { outline: 3px solid #4e6b80; outline-offset: 3px; }
+.faq-item > summary:focus-visible { outline-offset: -3px; }
+.meeting-download { margin-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.meeting-download h3 { margin: 0; font-size: 1.1rem; }
+.meeting-download .button { display: inline-flex; flex-direction: column; gap: 3px; }
+.download-format { font-size: .75rem; font-weight: 400; }
+.schedule-table { width: 100%; border-collapse: collapse; table-layout: fixed; margin-top: 18px; font-size: .95rem; line-height: 1.7; }
+.schedule-table caption { text-align: left; color: #596661; font-size: .85rem; margin-bottom: 10px; }
+.schedule-table th, .schedule-table td { text-align: left; vertical-align: top; padding: 12px 8px; border-bottom: 1px solid #d8dfdc; overflow-wrap: anywhere; }
+.schedule-table thead th { background: #f4f7f2; font-size: .85rem; color: #405e50; }
+.schedule-table th:first-child { width: 40%; }
+.schedule-table th:nth-child(2) { width: 34%; }
+.schedule-table th:nth-child(3) { width: 26%; }
+.schedule-table a { color: #365447; text-underline-offset: 4px; display: inline-flex; align-items: center; min-height: 44px; }
+.schedule-table small { display: block; font-size: .8rem; font-weight: 400; color: #596661; }
+.schedule-note { margin: 14px 0 0; font-size: .88rem; line-height: 1.8; }
+.schedule-official-link { display: inline-flex; align-items: center; min-height: 44px; color: #365447; text-underline-offset: 4px; }
+@media (max-width: 720px) {
+  .faq-item > summary { padding-left: 15px; padding-right: 42px; }
+  .faq-item > summary::after { right: 15px; }
+  .faq-answer { padding-left: 15px; padding-right: 15px; }
+  .meeting-download { align-items: flex-start; flex-direction: column; }
+  .announcement-status { padding: 18px 14px; }
+  .schedule-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .schedule-table tbody { display: block; }
+  .schedule-table tr { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0 12px; padding: 12px 0; border-bottom: 1px solid #d8dfdc; }
+  .schedule-table th, .schedule-table td { border: 0; padding: 0; width: auto !important; }
+  .schedule-table tbody th { grid-column: 1 / -1; margin-bottom: 6px; }
+  .schedule-table td { align-self: center; }
+  .schedule-table td:last-child { text-align: right; }
+}
