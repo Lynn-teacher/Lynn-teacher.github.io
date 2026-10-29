@@ -25,6 +25,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css?v=20261015a" />
+    <link rel="stylesheet" href="home-guide.css?v=20261026a" />
+    <script defer src="home-guide.js?v=20261026b"></script>
     <script defer src="site-events.js?v=20261015a"></script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"菜菜老師｜特教資訊整理","url":"https://lynn-teacher.github.io/","inLanguage":"zh-Hant-TW","description":"給國中特教家長的資訊入口。","publisher":{"@type":"Person","name":"菜菜老師"}}</script>
   <link rel="stylesheet" href="./navigation.css?v=20261015b" /></head>
@@ -36,18 +38,19 @@
         <h1 id="page-title">國中特教家長補給站</h1>
         <p>你現在想找什麼？</p>
         <div class="parent-portal-actions" aria-label="家長入口">
-          <a class="parent-portal-card concern" href="cards/"><img class="parent-portal-illustration" src="assets/illustrations/school-challenge-simple.png" alt="" /><strong>找陪伴孩子的方法</strong><small>學習、情緒與親子溝通指南。</small><b>看看相關指南 →</b></a>
-          <a class="parent-portal-card support" href="#school-support"><img class="parent-portal-illustration" src="assets/illustrations/school-support-simple.png" alt="" /><strong>找學校協助</strong><small>認識導師、輔導室與特教組能提供的協助。</small><b>看看可以找誰 →</b></a>
-          <a class="parent-portal-card placement" href="placement/"><img class="parent-portal-illustration" src="assets/illustrations/transition-path-simple.png" alt="" /><strong>查升學安置</strong><small>查看 116 學年度各縣市公告與申請資訊。</small><b>前往升學查詢 →</b></a>
+          <a class="parent-portal-card concern" href="cards/" data-home-entry="concern"><img class="parent-portal-illustration" src="assets/illustrations/school-challenge-simple.png" alt="" /><strong>找陪伴孩子的方法</strong><small>學習、情緒與親子溝通指南。</small><b>看看相關指南 →</b></a>
+          <a class="parent-portal-card support" href="#school-support" data-home-entry="support"><img class="parent-portal-illustration" src="assets/illustrations/school-support-simple.png" alt="" /><strong>找學校協助</strong><small>認識導師、輔導室與特教組能提供的協助。</small><b>看看可以找誰 →</b></a>
+          <a class="parent-portal-card placement" href="placement/" data-home-entry="placement"><img class="parent-portal-illustration" src="assets/illustrations/transition-path-simple.png" alt="" /><strong>查升學安置</strong><small>查看 116 學年度各縣市公告與申請資訊。</small><b>前往升學查詢 →</b></a>
         </div>
+        <section class="home-guide" id="home-guide" aria-labelledby="home-guide-title" hidden>
+          <div class="home-guide-heading"><h2 id="home-guide-title" tabindex="-1"></h2><button class="home-guide-close" type="button">收合 <span aria-hidden="true">×</span></button></div>
+          <div class="home-guide-options"></div>
+          <div class="home-guide-result" role="status" aria-live="polite" aria-atomic="true"></div>
+          <a class="home-guide-all" href="cards/">看全部家長指南 →</a>
+        </section>
       </section>
       <section class="school-support" id="school-support" aria-labelledby="school-support-title">
-        <div class="school-support-heading"><h2 id="school-support-title">孩子在學校遇到困難，先找誰？</h2><p>還不確定孩子需不需要特教服務，也可以先找老師聊聊。</p></div>
-        <dl class="school-support-list">
-          <div><dt>導師</dt><dd>作業常做不完、跟不上班級活動，或和同學相處有困難。</dd></div>
-          <div><dt>輔導室</dt><dd>孩子常不開心、和同學處不好，或不想去學校。</dd></div>
-          <div><dt>特教組／承辦人</dt><dd>想問特教鑑定、課堂協助，或升學前要準備什麼。</dd></div>
-        </dl>
+        <div class="school-support-heading"><h2 id="school-support-title">孩子在學校遇到困難，先找誰？</h2><p>先和導師聊聊，再依需要找輔導室或特教組協助。</p></div>
         <div class="meeting-download" id="meeting-sheet"><h3>和老師討論前，先記下這些</h3><a class="button secondary" href="assets/downloads/parent-meeting-sheet.pdf" download="和老師討論準備單.pdf">下載討論準備單<span class="download-format">PDF・A4 一頁</span></a></div>
       </section>
       <section class="teacher-about" id="about" aria-labelledby="about-title">

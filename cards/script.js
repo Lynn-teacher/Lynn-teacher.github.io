@@ -129,22 +129,26 @@ document.querySelectorAll('.card-collection').forEach((collection) => {
 function openLinkedCollection() {
   let id;
   try { id = decodeURIComponent(location.hash.slice(1)); } catch { return; }
-  const collection = document.getElementById(id);
-  if (collection?.classList.contains('guide-topic-group')) {
+  const linked = document.getElementById(id);
+  if (linked?.classList.contains('guide-topic-group')) {
     document.querySelectorAll('.card-collection').forEach((item) => { item.open = false; });
     requestAnimationFrame(() => {
-      const focusTarget = collection.querySelector('h2');
+      const focusTarget = linked.querySelector('h2');
       if (focusTarget) { focusTarget.tabIndex = -1; focusTarget.focus({ preventScroll: true }); }
-      collection.scrollIntoView({ block: 'start' });
+      linked.scrollIntoView({ block: 'start' });
     });
     return;
   }
-  if (!collection?.classList.contains('card-collection')) return;
+  const collection = linked?.closest('.card-collection');
+  if (!collection) return;
+  const quickStart = linked.classList.contains('guide-start');
+  // Existing shared URLs still open the complete reader; homepage links start short.
+  collection.querySelector('.guide-full').open = !quickStart;
   document.querySelectorAll('.card-collection').forEach((item) => {
     item.open = item === collection;
   });
   requestAnimationFrame(() => {
-      const focusTarget = collection.querySelector('.guide-title')?.closest('summary') || collection.querySelector('h2');
+      const focusTarget = quickStart ? linked.querySelector('h4') : collection.querySelector(':scope > summary');
       if (focusTarget) { focusTarget.focus({ preventScroll: true }); }
       collection.scrollIntoView({ block: 'start' });
     });
