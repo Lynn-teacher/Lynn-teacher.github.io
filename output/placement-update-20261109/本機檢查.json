@@ -1,0 +1,37 @@
+[
+  {
+    "page": "placement",
+    "validDates": 0,
+    "links": 23
+  },
+  {
+    "page": "taipei",
+    "validDates": 20,
+    "links": 36
+  },
+  {
+    "page": "new-taipei",
+    "validDates": 20,
+    "links": 34
+  },
+  {
+    "page": "taoyuan",
+    "validDates": 2,
+    "links": 22
+  },
+  {
+    "page": "taichung",
+    "validDates": 0,
+    "links": 20
+  },
+  {
+    "page": "kaohsiung",
+    "validDates": 0,
+    "links": 20
+  },
+  {
+    "page": "other-counties",
+    "validDates": 11,
+    "links": 27
+  }
+]
