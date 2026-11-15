@@ -1,0 +1,32 @@
+[
+  {
+    "checked": "查閱日期：2026/11/15",
+    "events": 17,
+    "overflow": false,
+    "page": "/new-taipei/",
+    "rows": 17,
+    "width": 390
+  },
+  {
+    "events": 0,
+    "overflow": false,
+    "page": "/placement/",
+    "rows": 0,
+    "width": 390
+  },
+  {
+    "checked": "查閱日期：2026/11/15",
+    "events": 17,
+    "overflow": false,
+    "page": "/new-taipei/",
+    "rows": 17,
+    "width": 320
+  },
+  {
+    "events": 0,
+    "overflow": false,
+    "page": "/placement/",
+    "rows": 0,
+    "width": 320
+  }
+]
