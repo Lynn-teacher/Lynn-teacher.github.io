@@ -1,0 +1,80 @@
+[
+  {
+    "checked": "查閱日期：2026/11/14",
+    "events": 11,
+    "overflow": false,
+    "page": "/other-counties/",
+    "rows": 11,
+    "statuses": [
+      "簡章已確認",
+      "日期已公告",
+      "日期已公告",
+      "日期已公告",
+      "日期已公告",
+      "日期已公告"
+    ],
+    "width": 390
+  },
+  {
+    "checked": "查閱日期：2026/11/14",
+    "events": 5,
+    "overflow": false,
+    "page": "/taichung/",
+    "rows": 5,
+    "statuses": [
+      "尚待確認",
+      "預定公告",
+      "日期已公告",
+      "尚待確認",
+      "尚待確認"
+    ],
+    "width": 390
+  },
+  {
+    "events": 0,
+    "overflow": false,
+    "page": "/placement/",
+    "rows": 0,
+    "statuses": [],
+    "width": 390
+  },
+  {
+    "checked": "查閱日期：2026/11/14",
+    "events": 11,
+    "overflow": false,
+    "page": "/other-counties/",
+    "rows": 11,
+    "statuses": [
+      "簡章已確認",
+      "日期已公告",
+      "日期已公告",
+      "日期已公告",
+      "日期已公告",
+      "日期已公告"
+    ],
+    "width": 320
+  },
+  {
+    "checked": "查閱日期：2026/11/14",
+    "events": 5,
+    "overflow": false,
+    "page": "/taichung/",
+    "rows": 5,
+    "statuses": [
+      "尚待確認",
+      "預定公告",
+      "日期已公告",
+      "尚待確認",
+      "尚待確認"
+    ],
+    "width": 320
+  },
+  {
+    "events": 0,
+    "overflow": false,
+    "page": "/placement/",
+    "rows": 0,
+    "statuses": [],
+    "width": 320
+  }
+]
